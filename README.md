@@ -1,4 +1,5 @@
 # LAPP
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 #### LAPP is Base for New Laravel Projects.
 
