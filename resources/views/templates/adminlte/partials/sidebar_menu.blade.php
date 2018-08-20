@@ -13,8 +13,8 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="#">Link 1 in level 2</a></li>
+            <li><a href="#">Link 2 in level 2</a></li>
         </ul>
     </li>
 </ul>
