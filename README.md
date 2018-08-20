@@ -1,5 +1,5 @@
 # LAPP
-![Mode: Develop](https://img.shields.io/badge/Mode-Develop-red.svg)
+![Mode: Development](https://img.shields.io/badge/Mode-Development-red.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 #### LAPP is Base for New Laravel Projects.
