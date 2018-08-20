@@ -21,9 +21,11 @@
 |Permanently Delete Soft Deleted Users|
 |Restore Soft Deleted Users|
 |View Soft Deleted Users|
-|User [Roles/ACL Implementation](https://github.com/jeremykenedy/laravel-roles)|
+|User Roles/ACL Implementation - Used [jeremykenedy/laravel-roles](https://github.com/jeremykenedy/laravel-roles)|
 |CRUD (Create, Read, Update, Delete) Role Management|
 |CRUD (Create, Read, Update, Delete) Permision Management|
+|Breadcrumb - Used [davejamesmiller/laravel-breadcrumbs:5.x](https://github.com/davejamesmiller/laravel-breadcrumbs)|
+|Menu - Used [lavary/laravel-menu](https://github.com/lavary/laravel-menu)|
 
 ## Installation Instructions
 1. First of all go to the folder where you will create the project.
