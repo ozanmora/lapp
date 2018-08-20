@@ -29,6 +29,7 @@
 |Breadcrumb - Used [davejamesmiller/laravel-breadcrumbs:5.x](https://github.com/davejamesmiller/laravel-breadcrumbs)|
 |Menu - Used [lavary/laravel-menu](https://github.com/lavary/laravel-menu)|
 |Forms - Used [laravelcollective/html](https://laravelcollective.com/docs/master/html)|
+|Gravatar - Used [creativeorange/gravatar](https://github.com/creativeorange/gravatar)|
 
 ## Installation Instructions
 1. First of all go to the folder where you will create the project.
