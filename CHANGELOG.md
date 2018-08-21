@@ -1,7 +1,7 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
-## Master
+## 2018-09-20
 ### Added
 * Breadcrumb system by [davejamesmiller/laravel-breadcrumbs:5.x](https://github.com/davejamesmiller/laravel-breadcrumbs)
 * Menu system by [lavary/laravel-menu](https://github.com/lavary/laravel-menu)
