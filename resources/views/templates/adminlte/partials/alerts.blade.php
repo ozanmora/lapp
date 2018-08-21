@@ -1,4 +1,19 @@
-<div class="alert alert-danger">
-    Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire
-    soul, like these sweet mornings of spring which I enjoy with my whole heart.
-</div>
+@if (count($errors) > 0)
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+            {{ $error }}
+        </div>
+    @endforeach
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-error" role="alert">
+        {{ session('error') }}
+    </div>
+@endif

@@ -1,19 +1,25 @@
 @extends('admin.layouts.app')
 
-@section('page_title', 'Dashboard')
+@section('title', trans('admin.dashboard.title'))
+
+@section('page_title', trans('admin.dashboard.title'))
+@section('page_title_description', trans('admin.dashboard.page_title_description'))
+
+@section('breadcrumbs', Breadcrumbs::render('admin.dashboard'))
 
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Dashboard</h3>
-                </div>
+            @component('templates.adminlte.components.box')
+                @slot('title')
+                    Test
+                @endslot
+                @slot('box_tools')
+                    <a href="#" class="btn btn-sm btn-primary">{{ trans('admin.create.button_text') }}</a>
+                @endslot
 
-                <div class="box-body">
-                    You are logged in!
-                </div>
-            </div>
+                Test component feature
+            @endcomponent
         </div>
     </div>
 @endsection

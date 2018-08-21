@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', config('app.name', 'LAPP'))</title>
+    <title>@hasSection('title')@yield('title') | @endif {{ config('app.name', 'LAPP') }}</title>
 
     @section('styles')
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
