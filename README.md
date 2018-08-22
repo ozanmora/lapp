@@ -4,7 +4,7 @@
 
 #### LAPP is Base for New Laravel Projects.
 
-**NOTE:**
+> NOTE
 > This project on Development Mode. You may encounter many errors while using it.
 
 ## About
