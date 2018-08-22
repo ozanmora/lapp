@@ -1,10 +1,6 @@
 <?php
 
 return [
-    'author_name' => env('APP_AUTHOR_NAME', 'Ozan Mora'),
-    'author_url' => env('APP_AUTHOR_URL', 'http://www.ozanmora.com/'),
-    'author_date' => env('APP_AUTHOR_DATE', date('Y')),
-
     /*
     |--------------------------------------------------------------------------
     | Application Name

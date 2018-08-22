@@ -18,4 +18,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/admin', 'Admin\DashboardController@index')->name('admin');
-Route::get('/admin/profile', 'Admin\DashboardController@profile')->name('admin.profile');
+Route::get('/admin/profile', 'Admin\DashboardController@profile')->name('profile');

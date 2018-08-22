@@ -8,7 +8,7 @@
                         <span>
                     @endif
                     @if ($loop->first)
-                        @lang('admin.dashboard.icon')
+                        @lang('admin.icon.dashboard')
                     @endif
                     {{ $breadcrumb->title }}
                     @if ($breadcrumb->url)

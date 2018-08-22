@@ -23,17 +23,17 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="@yield('user-avatar', asset('img/avatar.png'))" class="user-image" alt="">
+                        <img src="@yield('user_avatar', asset('img/avatar.png'))" class="user-image" alt="">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">@yield('user-name', 'Ozan Mora')</span>
+                        <span class="hidden-xs">@yield('user_name', 'Ozan Mora')</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="@yield('user-avatar', asset('img/avatar.png'))" class="img-circle" alt="">
+                            <img src="@yield('user_avatar', asset('img/avatar.png'))" class="img-circle" alt="">
                             <p>
-                                @yield('user-name', 'Ozan Mora')
-                                <small>{{ trans('adminlte.text.member_since') }} @yield('user-since', date('M Y'))</small>
+                                @yield('user_name', 'Ozan Mora')
+                                <small>{{ trans('adminlte.text.member_since') }} @yield('user_member_since', date('M Y'))</small>
                             </p>
                         </li>
                         {{--
@@ -56,12 +56,12 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">{{ trans('adminlte.text.profile') }}</a>
+                                <a href="{{ route('profile') }}" class="btn btn-default btn-flat">{{ trans('adminlte.button.profile') }}</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    @lang('adminlte.text.logout')
+                                    @lang('adminlte.button.logout')
                                 </a>
                             </div>
                         </li>

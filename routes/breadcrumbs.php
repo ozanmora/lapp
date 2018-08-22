@@ -2,5 +2,5 @@
 
 // Admin Dashboard
 Breadcrumbs::for('admin.dashboard', function ($trail) {
-    $trail->push(trans('admin.dashboard.breadcrumb_title'), route('admin'));
+    $trail->push(trans('admin.breadcrumb.dashboard'), route('admin'));
 });

@@ -1,9 +1,8 @@
 @extends('admin.layouts.app')
 
-@section('title', trans('admin.dashboard.title'))
+@section('title', trans('admin.title.dashboard'))
 
-@section('page_title', trans('admin.dashboard.title'))
-@section('page_title_description', trans('admin.dashboard.page_title_description'))
+@section('page_title', trans('admin.title.dashboard'))
 
 @section('breadcrumbs', Breadcrumbs::render('admin.dashboard'))
 
@@ -15,7 +14,7 @@
                     Test
                 @endslot
                 @slot('box_tools')
-                    <a href="#" class="btn btn-sm btn-primary">{{ trans('admin.create.button_text') }}</a>
+                    <a href="#" class="btn btn-sm btn-primary">{{ trans('admin.button.create') }}</a>
                 @endslot
 
                 Test component feature
