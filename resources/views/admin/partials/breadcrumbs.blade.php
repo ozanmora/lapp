@@ -2,7 +2,7 @@
     <ol class="breadcrumb">
         @foreach ($breadcrumbs as $breadcrumb)
             <li @if ($loop->last) class="active" @endif>
-                    @if ($breadcrumb->url)
+                    @if ($breadcrumb->url && !$loop->last)
                         <a href="{{ $breadcrumb->url }}">
                     @else
                         <span>
@@ -11,7 +11,7 @@
                         @lang('admin.icon.dashboard')
                     @endif
                     {{ $breadcrumb->title }}
-                    @if ($breadcrumb->url)
+                    @if ($breadcrumb->url && !$loop->last)
                         </a>
                     @else
                         </span>

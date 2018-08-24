@@ -13909,6 +13909,8 @@ var app = new Vue({
     el: '#app'
 });
 
+$('[data-toggle="tooltip"]').tooltip();
+
 $.fn.openMenu = function () {
     var className = $(this).attr('class');
     if (className == "treeview") {

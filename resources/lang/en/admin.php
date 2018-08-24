@@ -13,6 +13,11 @@ return [
         'menu_caret'            => '<i class="fa fa-fw fa-angle-left pull-right"></i>',
         'dashboard'             => '<i class="fa fa-fw fa-dashboard"></i>',
         'create'                => '<i class="fa fa-fw fa-plus"></i>',
+        'view'                  => '<i class="fa fa-fw fa-eye"></i>',
+        'edit'                  => '<i class="fa fa-fw fa-pencil"></i>',
+        'trash'                 => '<i class="fa fa-fw fa-trash-o"></i>',
+        'delete'                => '<i class="fa fa-fw fa-trash-o"></i>',
+        'restore'               => '<i class="fa fa-fw fa-refresh"></i>',
         'save'                  => '<i class="fa fa-fw fa-save"></i>',
         'back'                  => '<i class="fa fa-fw fa-back"></i>',
         'profile'               => '<i class="fa fa-fw fa-id-card"></i>',
@@ -23,17 +28,40 @@ return [
         'permission_management' => '<i class="fa fa-fw fa-unlock-alt"></i>',
     ],
     'title' => [
-        'dashboard' => 'Dashboard'
+        'dashboard'         => 'Dashboard',
+        'user_management'   => 'User Management',
+        'users'             => 'User List',
+        'user_create'       => 'Create New User',
+        'user_show'         => 'User Detail',
+        'user_edit'         => 'Edit User Detail',
+        'users_trash'         => 'Trash Can',
     ],
     'breadcrumb' => [
-        'dashboard' => 'Dashboard'
+        'dashboard'         => 'Dashboard',
+        'profile'           => 'Profile',
+        'user_management'   => 'User Management',
+        'users'             => 'List',
+        'user_create'       => 'Create',
+        'user_show'         => 'Detail',
+        'user_edit'         => 'Edit',
+        'users_trash'       => 'Trash Can',
     ],
     'button' => [
         'create'    => 'Create',
+        'view'      => 'Detail',
+        'edit'      => 'Edit',
+        'trash'     => 'Trash',
+        'delete'    => 'Delete',
+        'restore'   => 'Restore',
         'save'      => 'Save',
         'back'      => 'Back',
         'profile'   => 'Profile',
         'login'     => 'Login',
-        'Logout'    => 'Logout'
-    ]
+        'Logout'    => 'Logout',
+    ],
+    'column' => [
+        'actions'   => 'Actions',
+        'id'        => '#ID',
+    ],
+    'table_no_record' => 'No records to display'
 ];
