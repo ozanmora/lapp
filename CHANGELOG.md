@@ -1,6 +1,22 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 2018-09-24
+### Added
+* User Management created. (CURD & SoftDelete) - Confirm modals not ready!
+
+## 2018-09-23
+### Updated
+* AdminLTE template files updated
+
+## 2018-09-22
+### Updated
+* AdminLTE template files updated
+
+## 2018-09-21
+### Updated
+* AdminLTE template files updated
+
 ## 2018-09-20
 ### Added
 * Breadcrumb system by [davejamesmiller/laravel-breadcrumbs:5.x](https://github.com/davejamesmiller/laravel-breadcrumbs)
