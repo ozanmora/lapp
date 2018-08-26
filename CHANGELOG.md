@@ -1,9 +1,15 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 2018-09-26
+### Added
+* Role Management (CRUD) created. 
+* [SweetAlert](https://sweetalert.js.org/) for confirm modals
+* Confirm modals to User Management views.
+
 ## 2018-09-24
 ### Added
-* User Management created. (CURD & SoftDelete) - Confirm modals not ready!
+* User Management (CURD & SoftDelete) created. - Confirm modals not ready!
 
 ## 2018-09-23
 ### Updated
