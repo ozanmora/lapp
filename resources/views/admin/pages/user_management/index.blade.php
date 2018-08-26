@@ -27,19 +27,21 @@
                             <th width="50" class="text-center">{{ trans('admin.column.id') }}</th>
                             <th>{{ trans('user_management.column.name') }}</th>
                             <th>{{ trans('user_management.column.email') }}</th>
+                            <th class="text-center">{{ trans('user_management.column.role') }}</th>
                             <th width="150" class="text-center">{{ trans('user_management.column.created_at') }}</th>
                             <th width="150" class="text-center">{{ trans('admin.column.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if(count($users) === 0)
-                            <tr><td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td></tr>
+                            <tr><td colspan="6" class="text-center">{{ trans('admin.table_no_record') }}</td></tr>
                         @else
                             @foreach ($users as $user)
                                 <tr>
                                     <td class="text-center">{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td class="text-center">{{ $user->roles[0]->name }}</td>
                                     <td class="text-center">{{ $user->created_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>

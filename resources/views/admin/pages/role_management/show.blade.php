@@ -46,6 +46,58 @@
                 @endslot
             @endcomponent
         </div>
+        <div class="col-md-9">
+            @component('templates.adminlte.components.box', ['body_class' => 'table-responsive'])
+                @slot('header')
+                    @slot('title')
+                        {{ trans('admin.title.users') }}
+                    @endslot
+                @endslot
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th width="50" class="text-center">{{ trans('admin.column.id') }}</th>
+                            <th>{{ trans('user_management.column.name') }}</th>
+                            <th>{{ trans('user_management.column.email') }}</th>
+                            <th width="150" class="text-center">{{ trans('user_management.column.created_at') }}</th>
+                            <th width="150" class="text-center">{{ trans('admin.column.actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(count($role->users) === 0)
+                            <tr><td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td></tr>
+                        @else
+                            @foreach ($role->users as $user)
+                                <tr>
+                                    <td class="text-center">{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td class="text-center">{{ $user->created_at->format('m/d/Y H:i:s') }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
+                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                        <button class="btn btn-xs btn-danger"
+                                            data-confirm="DELETE"
+                                            data-confirm_form="delete-form-{{ $user->id }}"
+                                            data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
+                                            data-confirm_message="{{ trans('user_management.confirm.message_trash') }}"
+                                            title="{{ trans('admin.button.trash') }}">{!! trans('admin.icon.trash') !!}</button>
+                                        {!! Form::open([
+                                            'action' => ['Admin\UserManagement@destroy', $user],
+                                            'method' => 'DELETE',
+                                            'class' => 'delete-form hide',
+                                            'id' => "delete-form-{$user->id}",
+                                        ]) !!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            @endcomponent
+        </div>
     </div>
 @endsection
 
