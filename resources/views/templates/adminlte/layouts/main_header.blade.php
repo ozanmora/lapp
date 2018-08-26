@@ -32,7 +32,7 @@
                         <li class="user-header">
                             <img src="@yield('user_avatar', asset('img/avatar.png'))" class="img-circle" alt="">
                             <p>
-                                @yield('user_name', 'Ozan Mora')
+                                @yield('user_name', 'Ozan Mora')@hasSection('user_role') - @yield('user_role')@endif
                                 <small>{{ trans('adminlte.text.member_since') }} @yield('user_member_since', date('M Y'))</small>
                             </p>
                         </li>

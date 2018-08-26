@@ -70,5 +70,8 @@ return [
         'actions'   => 'Actions',
         'id'        => '#ID',
     ],
-    'table_no_record' => 'No records to display'
+    'table_no_record' => 'No records to display',
+    'text' => [
+        'select' => 'Select'
+    ]
 ];

@@ -12,7 +12,7 @@
         <div class="col-md-3">
             @component('templates.adminlte.components.box', ['box_class' => 'box-primary', 'body_class' => 'box-profile'])
                 <img class="profile-user-img img-responsive img-circle" src="{{ Gravatar::get($user->email, ['size' => 160]) }}" alt="">
-                <h3 class="profile-username text-center">{{ $user->name }}</h3>
+                <h3 class="profile-username text-center">{{ $user->name }} - {{ $user->roles[0]->name }}</h3>
                 <p class="text-muted text-center">{{ $user->email }}</p>
                 @slot('footer')
                 <div class="clearfix text-center">

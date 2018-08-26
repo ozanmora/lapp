@@ -37,6 +37,11 @@
                     {{ Form::label('password_confirmation', trans('user_management.field.password_confirmation')) }}
                     {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('user_management.placeholder.password_confirmation')]) }}
                 </div>
+
+                <div class="form-group">
+                    {!! Form::label('role', trans('user_management.field.role')); !!}
+                    {{ Form::select('role', $roles, $user->roles[0]->id, ['class' => 'form-control select2', 'placeholder' => trans('user_management.placeholder.role')]) }}
+                </div>
             @endcomponent
         </div>
     </div>

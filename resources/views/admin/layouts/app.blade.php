@@ -3,6 +3,7 @@
 @if (auth()->check())
     @section('user_avatar', Gravatar::get(auth()->user()->email, ['size' => 160]))
     @section('user_name', auth()->user()->name)
+    @section('user_role', auth()->user()->roles[0]->name)
     @section('user_member_since', auth()->user()->created_at->format('M Y'))
 @endif
 

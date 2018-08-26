@@ -9,7 +9,7 @@
     <title>@hasSection('title')@yield('title') | @endif {{ config('app.name', 'LAPP') }}</title>
 
     @section('styles')
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ mix('/css/admin-lte.css') }}" rel="stylesheet">
     @show
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -41,7 +41,9 @@
     </div>
 
     @section('scripts')
-        <script src="{{ asset('/js/app.js') }}"></script>
+        <script src="{{ mix('/js/manifest.js') }}" charset="utf-8"></script>
+        <script src="{{ mix('/js/vendor.js') }}" charset="utf-8"></script>
+        <script src="{{ mix('/js/admin-lte.js') }}" charset="utf-8"></script>
     @show
     @yield('footer_scripts')
 

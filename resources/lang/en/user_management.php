@@ -4,6 +4,7 @@ return [
     'column' => [
         'name'          => 'Full Name',
         'email'         => 'Email Adress',
+        'role'          => 'Role',
         'created_at'    => 'Registered Date',
         'deleted_at'    => 'Deleted Date',
     ],
@@ -11,13 +12,15 @@ return [
         'name'                  => 'Full Name',
         'email'                 => 'Email Adress',
         'password'              => 'Password',
-        'password_confirmation' => 'Password Confirmation'
+        'password_confirmation' => 'Password Confirmation',
+        'role'                  => 'Role'
     ],
     'placeholder' => [
         'name'                  => 'Full Name',
         'email'                 => 'Email Adress',
         'password'              => 'Password',
-        'password_confirmation' => 'Password Confirmation'
+        'password_confirmation' => 'Password Confirmation',
+        'role'                  => 'Select a Role'
     ],
     'message' => [
         'success_create'        => 'Successfully created user!',

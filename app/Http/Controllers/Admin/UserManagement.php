@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth;
+use jeremykenedy\LaravelRoles\Models\Role;
 
 class UserManagement extends Controller
 {
@@ -39,7 +40,18 @@ class UserManagement extends Controller
      */
     public function create()
     {
-        return view('admin.pages.user_management.create');
+        $roles = Role::all();
+
+        $option_roles = array();
+        foreach ($roles as $role) {
+            $option_roles[$role->id] = $role->name;
+        }
+
+        $data = [
+            'roles' => $option_roles,
+        ];
+
+        return view('admin.pages.user_management.create', $data);
     }
 
     /**
@@ -51,15 +63,21 @@ class UserManagement extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users',
+            'password'  => 'required|string|min:6|confirmed',
+            'role'      => 'required|integer'
         ]);
 
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        $user->detachAllRoles();
+        $user->attachRole($request->role);
 
         $user->save();
 
@@ -87,9 +105,25 @@ class UserManagement extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user  = User::findOrFail($id);
+        $roles = Role::all();
 
-        return view('admin.pages.user_management.edit', ['user' => $user]);
+        foreach ($user->roles as $user_role) {
+            $current_role = $user_role;
+        }
+
+        $option_roles = array();
+        foreach ($roles as $role) {
+            $option_roles[$role->id] = $role->name;
+        }
+
+        $data = [
+            'user'         => $user,
+            'roles'        => $option_roles,
+            'current_role' => $current_role,
+        ];
+
+        return view('admin.pages.user_management.edit', $data);
     }
 
     /**
@@ -102,9 +136,10 @@ class UserManagement extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-            'password' => 'nullable|string|min:6|confirmed',
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users,email,'.$id,
+            'password'  => 'nullable|string|min:6|confirmed',
+            'role'      => 'required|integer'
         ]);
 
         $user = User::findOrFail($id);
@@ -113,6 +148,9 @@ class UserManagement extends Controller
         if ($request->has('password')) {
             $user->password = Hash::make($request->password);
         }
+
+        $user->detachAllRoles();
+        $user->attachRole($request->role);
 
         $user->save();
 
