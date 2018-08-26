@@ -38,15 +38,31 @@
                                     <td>{{ $user->email }}</td>
                                     <td class="text-center">{{ $user->deleted_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-xs btn-success"
-                                            onclick="event.preventDefault(); document.getElementById('restore-form-{{ $user->id }}').submit();"
-                                            title="{{ trans('admin.button.restore') }}">{!! trans('admin.icon.restore') !!}</a>
-                                        {!! Form::open(['action' => ['Admin\UserSoftDelete@update',$user], 'method' => 'PUT', 'class' => 'restore-form hide', 'id' => "restore-form-{$user->id}"]) !!}
+                                        <button class="btn btn-xs btn-success"
+                                            data-confirm="RESTORE"
+                                            data-confirm_form="restore-form-{{ $user->id }}"
+                                            data-confirm_title="{{ trans_choice('user_management.confirm.title_restore', 1, ['name' => $user->name]) }}"
+                                            data-confirm_message="{{ trans('user_management.confirm.message_restore') }}"
+                                            title="{{ trans('admin.button.restore') }}">{!! trans('admin.icon.restore') !!}</button>
+                                        {!! Form::open([
+                                            'action' => ['Admin\UserSoftDelete@update', $user],
+                                            'method' => 'PUT',
+                                            'class' => 'restore-form hide',
+                                            'id' => "restore-form-{$user->id}",
+                                        ]) !!}
                                         {!! Form::close() !!}
-                                        <a href="#" class="btn btn-xs btn-danger"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->id }}').submit();"
-                                            title="{{ trans('admin.button.delete') }}">{!! trans('admin.icon.delete') !!}</a>
-                                        {!! Form::open(['action' => ['Admin\UserSoftDelete@destroy',$user], 'method' => 'DELETE', 'class' => 'delete-form hide', 'id' => "delete-form-{$user->id}"]) !!}
+                                        <button class="btn btn-xs btn-danger"
+                                            data-confirm="DELETE"
+                                            data-confirm_form="delete-form-{{ $user->id }}"
+                                            data-confirm_title="{{ trans_choice('user_management.confirm.title_delete', 1, ['name' => $user->name]) }}"
+                                            data-confirm_message="{{ trans('user_management.confirm.message_delete') }}"
+                                            title="{{ trans('admin.button.delete') }}">{!! trans('admin.icon.delete') !!}</button>
+                                        {!! Form::open([
+                                            'action' => ['Admin\UserSoftDelete@destroy', $user],
+                                            'method' => 'DELETE',
+                                            'class' => 'delete-form hide',
+                                            'id' => "delete-form-{$user->id}",
+                                        ]) !!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
@@ -62,4 +78,9 @@
             @endcomponent
         </div>
     </div>
+@endsection
+
+@section('footer_scripts')
+    @parent
+    @include('admin.scripts.modal_confirm')
 @endsection

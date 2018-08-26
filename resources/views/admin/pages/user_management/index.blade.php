@@ -45,9 +45,17 @@
                                         <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
                                         <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
                                         <button class="btn btn-xs btn-danger"
-                                            onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->id }}').submit();"
-                                            title="{{ trans('admin.button.delete') }}">{!! trans('admin.icon.delete') !!}</button>
-                                        {!! Form::open(['action' => ['Admin\UserManagement@destroy', $user], 'method' => 'DELETE', 'class' => 'delete-form hide', 'id' => "delete-form-{$user->id}"]) !!}
+                                            data-confirm="DELETE"
+                                            data-confirm_form="delete-form-{{ $user->id }}"
+                                            data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
+                                            data-confirm_message="{{ trans('user_management.confirm.message_trash') }}"
+                                            title="{{ trans('admin.button.trash') }}">{!! trans('admin.icon.trash') !!}</button>
+                                        {!! Form::open([
+                                            'action' => ['Admin\UserManagement@destroy', $user],
+                                            'method' => 'DELETE',
+                                            'class' => 'delete-form hide',
+                                            'id' => "delete-form-{$user->id}",
+                                        ]) !!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
@@ -63,4 +71,9 @@
             @endcomponent
         </div>
     </div>
+@endsection
+
+@section('footer_scripts')
+    @parent
+    @include('admin.scripts.modal_confirm')
 @endsection
