@@ -41,7 +41,7 @@
                                     <td class="text-center">{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td class="text-center">{{ $user->roles[0]->name }}</td>
+                                    <td class="text-center">{{ $user->roles->first()->name or '-' }}</td>
                                     <td class="text-center">{{ $user->created_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>

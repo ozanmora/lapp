@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     {!! Form::label('role', trans('user_management.field.role')); !!}
-                    {{ Form::select('role', $roles, $user->roles[0]->id, ['class' => 'form-control select2', 'placeholder' => trans('user_management.placeholder.role')]) }}
+                    {{ Form::select('role', $roles, $current_role, ['class' => 'form-control select2', 'placeholder' => trans('user_management.placeholder.role')]) }}
                 </div>
             @endcomponent
         </div>

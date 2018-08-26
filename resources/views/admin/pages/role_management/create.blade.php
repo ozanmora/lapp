@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('level', trans('role_management.field.level')) }}
-                    {{ Form::number('level', 1, ['class' => 'form-control', 'placeholder' => trans('role_management.placeholder.level'), 'min' => 1, 'max' => 5]) }}
+                    {{ Form::number('level', 0, ['class' => 'form-control', 'placeholder' => trans('role_management.placeholder.level'), 'min' => 0, 'max' => 5]) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('description', trans('role_management.field.description')) }}

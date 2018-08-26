@@ -108,9 +108,7 @@ class UserManagement extends Controller
         $user  = User::findOrFail($id);
         $roles = Role::all();
 
-        foreach ($user->roles as $user_role) {
-            $current_role = $user_role;
-        }
+        $current_role = ($user->roles->isEmpty()) ? null : $user->roles->first()->id;
 
         $option_roles = array();
         foreach ($roles as $role) {

@@ -27,6 +27,7 @@
                             <th>{{ trans('role_management.column.name') }}</th>
                             <th>{{ trans('role_management.column.slug') }}</th>
                             <th width="150" class="text-center">{{ trans('role_management.column.level') }}</th>
+                            <th width="150" class="text-center">{{ trans('role_management.column.users') }}</th>
                             <th width="150" class="text-center">{{ trans('admin.column.actions') }}</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->slug }}</td>
                                     <td class="text-center">{{ $role->level }}</td>
+                                    <td class="text-center">{{ count($role->users) }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
                                         <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-xs btn-warning" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>

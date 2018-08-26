@@ -40,6 +40,7 @@ class RoleManagement extends Controller
      */
     public function create()
     {
+
         return view('admin.pages.role_management.create');
     }
 
@@ -55,7 +56,7 @@ class RoleManagement extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:roles',
             'description' => 'nullable|string|max:255',
-            'level' => 'required|integer|min:1|max:5',
+            'level' => 'required|integer|min:0|max:5',
         ]);
 
         $role = Role::create([
@@ -80,7 +81,11 @@ class RoleManagement extends Controller
     {
         $role = Role::findOrFail($id);
 
-        return view('admin.pages.role_management.show', ['role' => $role]);
+        $data = [
+            'role' => $role
+        ];
+
+        return view('admin.pages.role_management.show', $data);
     }
 
     /**
@@ -93,7 +98,11 @@ class RoleManagement extends Controller
     {
         $role = Role::findOrFail($id);
 
-        return view('admin.pages.role_management.edit', ['role' => $role]);
+        $data = [
+            'role' => $role,
+        ];
+
+        return view('admin.pages.role_management.edit', $data);
     }
 
     /**
@@ -109,7 +118,7 @@ class RoleManagement extends Controller
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:roles,slug,'.$id,
             'description' => 'nullable|string|max:255',
-            'level' => 'required|integer|min:1|max:5',
+            'level' => 'required|integer|min:0|max:5',
         ]);
 
         $role = Role::findOrFail($id);
@@ -134,10 +143,20 @@ class RoleManagement extends Controller
      */
     public function destroy($id)
     {
+        $currentUser = Auth::user();
         $role = Role::findOrFail($id);
+
+        if ((int) $role->id === (int) $currentUser->roles[0]->id) {
+            return back()->with('error', trans('role_management.message.error_delete_self'));
+        }
+
+        if (count($role->users) > 0) {
+            return back()->with('error', trans('role_management.message.error_delete_has_user', ['count' => count($role->users)]));
+        }
 
         $role->delete();
 
         return redirect()->route('admin.roles')->with('success', trans('role_management.message.success_delete'));
+
     }
 }
