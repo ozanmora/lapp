@@ -20,3 +20,8 @@
 </ul>
 <!-- /.sidebar-menu -->
 @show
+
+@section('footer_scripts')
+    @parent
+    @include('templates.adminlte.scripts.sidebar_search')
+@endsection

@@ -27,7 +27,7 @@ class GenerateMenus
         \Menu::make('AdminSidebarMenu', function ($menu) {
             $menu->add(trans('admin.menu.dashboard'),  [ 'route' => 'admin' ])->prepend(trans('admin.icon.dashboard').'&nbsp; ')->nickname('admin');
             $menu->add(trans('admin.menu.user_management'), [ 'route' => 'admin.users' ])->prepend(trans('admin.icon.user_management').'&nbsp; ')->nickname('admin.user_management');
-            $menu->add(trans('admin.menu.role_management'), '#')->prepend(trans('admin.icon.role_management').'&nbsp; ')->nickname('admin.role_management');
+            $menu->add(trans('admin.menu.role_management'), [ 'route' => 'admin.roles' ])->prepend(trans('admin.icon.role_management').'&nbsp; ')->nickname('admin.role_management');
             $menu->add(trans('admin.menu.permission_management'), '#')->prepend(trans('admin.icon.permission_management').'&nbsp; ')->nickname('admin.permission_management');
         });
 
