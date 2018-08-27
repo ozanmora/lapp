@@ -33,7 +33,7 @@ Route::get('/admin/users/trash', 'Admin\UserSoftDelete@index')->name('admin.user
 Route::put('/admin/users/restore/{id}', 'Admin\UserSoftDelete@update');
 Route::delete('/admin/users/destroy/{id}', 'Admin\UserSoftDelete@destroy');
 
-// User Management Routes
+// Role Management Routes
 Route::get('/admin/roles', 'Admin\RoleManagement@index')->name('admin.roles');
 Route::get('/admin/roles/show/{id}', 'Admin\RoleManagement@show')->name('admin.roles.show');
 Route::get('/admin/roles/create', 'Admin\RoleManagement@create')->name('admin.roles.create');
@@ -41,3 +41,12 @@ Route::post('/admin/roles/store', 'Admin\RoleManagement@store');
 Route::get('/admin/roles/edit/{id}', 'Admin\RoleManagement@edit')->name('admin.roles.edit');
 Route::put('/admin/roles/update/{id}', 'Admin\RoleManagement@update');
 Route::delete('/admin/roles/delete/{id}', 'Admin\RoleManagement@destroy');
+
+// Permission Management Routes
+Route::get('/admin/permissions', 'Admin\PermissionManagement@index')->name('admin.permissions');
+Route::get('/admin/permissions/show/{id}', 'Admin\PermissionManagement@show')->name('admin.permissions.show');
+Route::get('/admin/permissions/create', 'Admin\PermissionManagement@create')->name('admin.permissions.create');
+Route::post('/admin/permissions/store', 'Admin\PermissionManagement@store');
+Route::get('/admin/permissions/edit/{id}', 'Admin\PermissionManagement@edit')->name('admin.permissions.edit');
+Route::put('/admin/permissions/update/{id}', 'Admin\PermissionManagement@update');
+Route::delete('/admin/permissions/delete/{id}', 'Admin\PermissionManagement@destroy');

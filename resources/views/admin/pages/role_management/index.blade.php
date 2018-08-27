@@ -43,13 +43,14 @@
                                     <td class="text-center">{{ $role->level }}</td>
                                     <td class="text-center">{{ count($role->users) }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
-                                        <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-xs btn-warning" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                        <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
+                                        <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
                                         <button class="btn btn-xs btn-danger"
                                             data-confirm="DELETE"
                                             data-confirm_form="delete-form-{{ $role->id }}"
                                             data-confirm_title="{{ trans_choice('role_management.confirm.title_delete', 1, ['name' => $role->name]) }}"
                                             data-confirm_message="{{ trans('role_management.confirm.message_delete') }}"
+                                            data-toggle="tooltip"
                                             title="{{ trans('admin.button.delete') }}">{!! trans('admin.icon.delete') !!}</button>
                                         {!! Form::open([
                                             'action' => ['Admin\RoleManagement@destroy', $role],

@@ -2633,6 +2633,8 @@ if (token) {
 // });
 
 $(document).ready(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+
   $('.i-checks').iCheck({
     checkboxClass: 'icheckbox_square-blue',
     radioClass: 'iradio_square-blue'

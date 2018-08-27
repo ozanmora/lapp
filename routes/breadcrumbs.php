@@ -76,3 +76,33 @@ Breadcrumbs::for('admin.roles.edit', function ($trail, $role) {
     $trail->parent('admin.roles.show', $role);
     $trail->push(trans('admin.breadcrumb.edit'), route('admin.roles.edit', $role));
 });
+
+// Admin Permission Management
+Breadcrumbs::for('admin.permission_management', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push(trans('admin.breadcrumb.permission_management'), route('admin.permissions'));
+});
+
+// Admin Permission List
+Breadcrumbs::for('admin.permissions', function ($trail) {
+    $trail->parent('admin.permission_management');
+    $trail->push(trans('admin.breadcrumb.list'), route('admin.permissions'));
+});
+
+// Admin Permission Create
+Breadcrumbs::for('admin.permissions.create', function ($trail) {
+    $trail->parent('admin.permission_management');
+    $trail->push(trans('admin.breadcrumb.create'), route('admin.permissions.create'));
+});
+
+// Admin Permission Show
+Breadcrumbs::for('admin.permissions.show', function ($trail, $permission) {
+    $trail->parent('admin.permission_management');
+    $trail->push($permission->name, route('admin.permissions.show', $permission));
+});
+
+// Admin Permission Edit
+Breadcrumbs::for('admin.permissions.edit', function ($trail, $permission) {
+    $trail->parent('admin.permissions.show', $permission);
+    $trail->push(trans('admin.breadcrumb.edit'), route('admin.permissions.edit', $permission));
+});

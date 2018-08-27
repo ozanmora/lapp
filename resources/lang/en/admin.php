@@ -40,7 +40,11 @@ return [
         'role_create'       => 'Create New Role',
         'role_show'         => 'Role Detail',
         'role_edit'         => 'Edit Role',
-        'roles_trash'       => 'Trash Can',
+        'permission_management' => 'Permission Management',
+        'permissions'           => 'Permission List',
+        'permission_create'     => 'Create New Permission',
+        'permission_show'       => 'Permission Detail',
+        'permission_edit'       => 'Edit Permission',
     ],
     'breadcrumb' => [
         'dashboard'         => 'Dashboard',
@@ -52,6 +56,7 @@ return [
         'trash'             => 'Trash Can',
         'user_management'   => 'User Management',
         'role_management'   => 'Role Management',
+        'permission_management'   => 'Permission Management',
     ],
     'button' => [
         'create'    => 'Create',

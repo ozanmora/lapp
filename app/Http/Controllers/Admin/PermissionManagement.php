@@ -10,7 +10,7 @@ use jeremykenedy\LaravelRoles\Models\Role;
 use jeremykenedy\LaravelRoles\Models\Permission;
 use Auth;
 
-class RoleManagement extends Controller
+class PermissionManagement extends Controller
 {
     /**
      * Create a new controller instance.
@@ -29,9 +29,9 @@ class RoleManagement extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(10);
+        $permissions = Permission::paginate(10);
 
-        return view('admin.pages.role_management.index', ['roles' => $roles]);
+        return view('admin.pages.permission_management.index', ['permissions' => $permissions]);
     }
 
     /**
@@ -42,7 +42,7 @@ class RoleManagement extends Controller
     public function create()
     {
 
-        return view('admin.pages.role_management.create');
+        return view('admin.pages.permission_management.create');
     }
 
     /**
@@ -55,21 +55,21 @@ class RoleManagement extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:roles',
+            'slug' => 'required|string|max:255|unique:permissions',
             'description' => 'nullable|string|max:255',
-            'level' => 'required|integer|min:0|max:5',
+            'model' => 'nullable|string|max:255',
         ]);
 
-        $role = Role::create([
+        $permission = Permission::create([
             'name' => $request->name,
             'slug' => $request->slug,
             'description' => ($request->has('description')) ? $request->description : null,
-            'level' => $request->level,
+            'model' => ($request->has('model')) ? $request->description : null,
         ]);
 
-        $role->save();
+        $permission->save();
 
-        return redirect()->route('admin.roles')->with('success', trans('role_management.message.success_create'));
+        return redirect()->route('admin.permissions')->with('success', trans('permission_management.message.success_create'));
     }
 
     /**
@@ -80,13 +80,13 @@ class RoleManagement extends Controller
      */
     public function show($id)
     {
-        $role = Role::findOrFail($id);
+        $permission = Permission::findOrFail($id);
 
         $data = [
-            'role' => $role
+            'permission' => $permission
         ];
 
-        return view('admin.pages.role_management.show', $data);
+        return view('admin.pages.permission_management.show', $data);
     }
 
     /**
@@ -97,13 +97,13 @@ class RoleManagement extends Controller
      */
     public function edit($id)
     {
-        $role = Role::findOrFail($id);
+        $permission = Permission::findOrFail($id);
 
         $data = [
-            'role' => $role,
+            'permission' => $permission,
         ];
 
-        return view('admin.pages.role_management.edit', $data);
+        return view('admin.pages.permission_management.edit', $data);
     }
 
     /**
@@ -117,23 +117,25 @@ class RoleManagement extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:roles,slug,'.$id,
+            'slug' => 'required|string|max:255|unique:permissions,slug,'.$id,
             'description' => 'nullable|string|max:255',
-            'level' => 'required|integer|min:0|max:5',
+            'model' => 'nullable|string|max:255',
         ]);
 
-        $role = Role::findOrFail($id);
+        $permission = Permission::findOrFail($id);
 
-        $role->name = $request->name;
-        $role->slug = $request->slug;
-        $role->level = $request->level;
+        $permission->name = $request->name;
+        $permission->slug = $request->slug;
         if ($request->has('description')) {
-            $role->description = $request->description;
+            $permission->description = $request->description;
+        }
+        if ($request->has('model')) {
+            $permission->model = $request->model;
         }
 
-        $role->save();
+        $permission->save();
 
-        return redirect()->route('admin.roles.show', $role)->with('success', trans('role_management.message.success_update'));
+        return redirect()->route('admin.permissions.show', $permission)->with('success', trans('permission_management.message.success_update'));
     }
 
     /**
@@ -144,20 +146,22 @@ class RoleManagement extends Controller
      */
     public function destroy($id)
     {
-        $currentUser = Auth::user();
-        $role = Role::findOrFail($id);
+        //$currentUser = Auth::user();
+        $permission = Permission::findOrFail($id);
 
-        if ((int) $role->id === (int) $currentUser->roles[0]->id) {
-            return back()->with('error', trans('role_management.message.error_delete_self'));
+        /*
+        if ((int) $permission->id === (int) $currentUser->permissions[0]->id) {
+            return back()->with('error', trans('permission_management.message.error_delete_self'));
         }
 
-        if (count($role->users) > 0) {
-            return back()->with('error', trans('role_management.message.error_delete_has_user', ['count' => count($role->users)]));
+        if (count($permission->users) > 0) {
+            return back()->with('error', trans('permission_management.message.error_delete_has_user', ['count' => count($permission->users)]));
         }
+        */
 
-        $role->delete();
+        $permission->delete();
 
-        return redirect()->route('admin.roles')->with('success', trans('role_management.message.success_delete'));
+        return redirect()->route('admin.permissions')->with('success', trans('permission_management.message.success_delete'));
 
     }
 }

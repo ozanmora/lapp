@@ -44,13 +44,14 @@
                                     <td class="text-center">{{ $user->roles->first()->name or '-' }}</td>
                                     <td class="text-center">{{ $user->created_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
-                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                        <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
+                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
                                         <button class="btn btn-xs btn-danger"
                                             data-confirm="DELETE"
                                             data-confirm_form="delete-form-{{ $user->id }}"
                                             data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
                                             data-confirm_message="{{ trans('user_management.confirm.message_trash') }}"
+                                            data-toggle="tooltip"
                                             title="{{ trans('admin.button.trash') }}">{!! trans('admin.icon.trash') !!}</button>
                                         {!! Form::open([
                                             'action' => ['Admin\UserManagement@destroy', $user],

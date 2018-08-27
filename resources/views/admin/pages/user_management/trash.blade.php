@@ -43,6 +43,7 @@
                                             data-confirm_form="restore-form-{{ $user->id }}"
                                             data-confirm_title="{{ trans_choice('user_management.confirm.title_restore', 1, ['name' => $user->name]) }}"
                                             data-confirm_message="{{ trans('user_management.confirm.message_restore') }}"
+                                            data-toggle="tooltip"
                                             title="{{ trans('admin.button.restore') }}">{!! trans('admin.icon.restore') !!}</button>
                                         {!! Form::open([
                                             'action' => ['Admin\UserSoftDelete@update', $user],
@@ -56,6 +57,7 @@
                                             data-confirm_form="delete-form-{{ $user->id }}"
                                             data-confirm_title="{{ trans_choice('user_management.confirm.title_delete', 1, ['name' => $user->name]) }}"
                                             data-confirm_message="{{ trans('user_management.confirm.message_delete') }}"
+                                            data-toggle="tooltip"
                                             title="{{ trans('admin.button.delete') }}">{!! trans('admin.icon.delete') !!}</button>
                                         {!! Form::open([
                                             'action' => ['Admin\UserSoftDelete@destroy', $user],
