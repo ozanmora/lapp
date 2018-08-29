@@ -57,7 +57,7 @@ class GenerateMenus
                     $parse = explode(':', $item->data('permission'));
                     switch ($parse[0]) {
                         case 'role':
-                                $result = (Auth::user()->hasRole($parse[1]));
+                                $result = (Auth::user()->hasRole($parse[1]) || Auth::user()->hasRole('root'));
                             break;
                         case 'permission':
                                 $result = (Auth::user()->hasPermission($parse[1]) || Auth::user()->hasRole('root'));

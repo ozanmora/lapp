@@ -31,7 +31,7 @@ class UserManagement extends Controller
      */
     public function create()
     {
-        $roles = Role::orderBy('level', 'desc')->get();
+        $roles = Role::where('level', '<=', Auth::user()->level())->orderBy('level', 'desc')->get();
 
         $option_roles = array();
         foreach ($roles as $role) {
@@ -96,7 +96,7 @@ class UserManagement extends Controller
     public function edit($id)
     {
         $user  = User::findOrFail($id);
-        $roles = Role::orderBy('level', 'desc')->get();
+        $roles = Role::where('level', '<=', Auth::user()->level())->orderBy('level', 'desc')->get();
 
         $current_role = ($user->roles->isEmpty()) ? null : $user->roles->first()->id;
 
@@ -155,6 +155,10 @@ class UserManagement extends Controller
     {
         $currentUser = Auth::user();
         $user = User::findOrFail($id);
+
+        if ($user->roles->first()->level > $currentUser->roles->first()->level) {
+            return back()->with('error', trans('user_management.message.error_delete_level'));
+        }
 
         if ((int) $user->id !== (int) $currentUser->id) {
             $user->delete();

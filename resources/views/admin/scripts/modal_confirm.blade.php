@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $('button[data-confirm]').on('click', function(e) {
+    $('button[data-confirm]:not(.disabled)').on('click', function(e) {
         e.preventDefault();
         var $title   = $(this).data('confirm_title');
         var $text    = $(this).data('confirm_message');

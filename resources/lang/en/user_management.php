@@ -5,6 +5,7 @@ return [
         'name'          => 'Full Name',
         'email'         => 'Email Adress',
         'role'          => 'Role',
+        'permissions'   => 'Permissions',
         'created_at'    => 'Registered Date',
         'deleted_at'    => 'Deleted Date',
     ],
@@ -30,7 +31,9 @@ return [
         'success_force_delete'  => 'Successfully completely deleted user!',
         'success_detach_role'   => 'Successfully detach role from user!',
         'success_detach_permission' => 'Successfully detach permission from user!',
-        'error_delete_self'     => 'You cannot delete yourself!',
+        'error_delete_self'     => 'You can not delete yourself!',
+        'error_delete_root'     => 'You can not delete "ROOT" user!',
+        'error_delete_level'    => 'You can not delete the user from higher level user yourself!',
         'error_undefined'       => 'You have some problem for this action',
     ],
     'confirm' => [

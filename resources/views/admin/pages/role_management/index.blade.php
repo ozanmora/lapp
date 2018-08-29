@@ -39,8 +39,8 @@
                                 <tr>
                                     <td class="text-center">{{ $role->id }}</td>
                                     <td>{{ $role->name }}</td>
-                                    <td>{{ $role->slug }}</td>
-                                    <td class="text-center">{{ $role->level }}</td>
+                                    <td><span class="label label-role_{{ $role->slug }}">{{ $role->name }}</span></td>
+                                    <td class="text-center"><span class="label label-level_{{ $role->level }}">{{ $role->level }}</span></td>
                                     <td class="text-center">
                                         <span data-toggle="tooltip" title="{{ trans('role_management.column.users') }}" class="label label-default">{{ count($role->users) }}</span>
                                         <span data-toggle="tooltip" title="{{ trans('role_management.column.permissions') }}" class="label label-default">{{ count($role->permissions) }}</span>
@@ -48,7 +48,7 @@
                                     <td class="text-center">
                                         <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
                                         <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
-                                        <button class="btn btn-xs btn-danger"
+                                        <button class="btn btn-xs btn-danger @if ($role->slug === 'root') disabled @endif"
                                             data-confirm="DELETE"
                                             data-confirm_form="delete-form-{{ $role->id }}"
                                             data-confirm_title="{{ trans_choice('role_management.confirm.title_delete', 1, ['name' => $role->name]) }}"

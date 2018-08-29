@@ -22,14 +22,14 @@
                         <tr><th>{{ trans('role_management.field.name') }}</th><td class="text-right">{{ $role->name }}</td></tr>
                         <tr><th>{{ trans('role_management.field.slug') }}</th><td class="text-right">{{ $role->slug }}</td></tr>
                         <tr><th>{{ trans('role_management.field.description') }}</th><td class="text-right">{{ $role->description }}</td></tr>
-                        <tr><th>{{ trans('role_management.field.level') }}</th><td class="text-right">{{ $role->level }}</td></tr>
+                        <tr><th>{{ trans('role_management.field.level') }}</th><td class="text-right"><span class="label label-level_{{ $role->level }}">{{ $role->level }}</span></td></tr>
                     </tbody>
                 </table>
 
                 @slot('footer')
                 <div class="clearfix text-center">
                     <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-md btn-warning pull-left">@lang('admin.icon.edit') @lang('admin.button.edit')</a>
-                    <button class="btn btn-md btn-danger pull-right"
+                    <button class="btn btn-md btn-danger pull-right @if ($role->slug === 'root') disabled @endif"
                         data-confirm="DELETE"
                         data-confirm_form="delete-form-{{ $role->id }}"
                         data-confirm_title="{{ trans_choice('role_management.confirm.title_delete', 1, ['name' => $role->name]) }}"
@@ -77,6 +77,7 @@
                                     <td class="text-center">
                                         <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
                                         <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                        {{--
                                         <button class="btn btn-xs btn-danger"
                                             data-confirm="DETACH"
                                             data-confirm_form="detach_user-form-{{ $user->id }}"
@@ -91,6 +92,7 @@
                                             'id' => "detach_user-form-{$user->id}",
                                         ]) !!}
                                         {!! Form::close() !!}
+                                        --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -128,7 +130,7 @@
                                     <td class="text-center">
                                         <a href="{{ route('admin.permissions.show', $permission) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
                                         <a href="{{ route('admin.permissions.edit', $permission) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
-                                        <button class="btn btn-xs btn-danger"
+                                        <button class="btn btn-xs btn-danger @if ($role->slug === 'root') disabled @endif"
                                             data-confirm="DETACH"
                                             data-confirm_form="detach_permission-form-{{ $permission->id }}"
                                             data-confirm_title="{{ trans_choice('role_management.confirm.title_detach_permission', 1, ['name' => $permission->name]) }}"

@@ -37,11 +37,17 @@
                     {{ Form::label('password_confirmation', trans('user_management.field.password_confirmation')) }}
                     {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('user_management.placeholder.password_confirmation')]) }}
                 </div>
-
+                @if($user->level() > Auth::user()->level())
                 <div class="form-group">
                     {!! Form::label('role', trans('user_management.field.role')); !!}
-                    {{ Form::select('role', $roles, $current_role, ['class' => 'form-control select2', 'placeholder' => trans('user_management.placeholder.role')]) }}
-                </div>
+                    {{ Form::text('role_name', $user->roles->first()->name, ['class' => 'form-control', 'disabled' => 'disabled']) }}
+                    {{ Form::hidden('role', $user->roles->first()->id) }}
+                @else
+                    <div class="form-group">
+                        {!! Form::label('role', trans('user_management.field.role')); !!}
+                        {{ Form::select('role', $roles, $current_role, ['class' => 'form-control select2', 'placeholder' => trans('user_management.placeholder.role')]) }}
+                    </div>
+                @endif
             @endcomponent
         </div>
     </div>

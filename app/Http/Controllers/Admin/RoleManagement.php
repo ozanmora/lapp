@@ -65,12 +65,19 @@ class RoleManagement extends Controller
             'name' => $request->name,
             'slug' => $request->slug,
             'description' => $request->description,
-            'level' => $request->level,
+            'level' => ($request->slug === 'root') ? 5 : $request->level,
         ]);
 
         $role->save();
 
-        $role->syncPermissions($request->permissions);
+        if ($role->slug === 'root') {
+            $permissions = Permission::orderBy('slug', 'asc')->get();
+            foreach ($permissions as $permission) {
+                $role->attachPermission($permission);
+            }
+        } elseif ($request->has('permissions')) {
+            $role->syncPermissions($request->permissions);
+        }
 
         $role->save();
 
@@ -146,12 +153,19 @@ class RoleManagement extends Controller
 
         $role->name = $request->name;
         $role->slug = $request->slug;
-        $role->level = $request->level;
+        $role->level =  ($request->slug === 'root') ? 5 : $request->level;
         if ($request->filled('description')) {
             $role->description = $request->description;
         }
 
-        $role->syncPermissions($request->permissions);
+        if ($role->slug === 'root') {
+            $permissions = Permission::orderBy('slug', 'asc')->get();
+            foreach ($permissions as $permission) {
+                $role->attachPermission($permission);
+            }
+        } elseif ($request->has('permissions')) {
+            $role->syncPermissions($request->permissions);
+        }
 
         $role->save();
 

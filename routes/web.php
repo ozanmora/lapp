@@ -26,14 +26,14 @@ Route::group(['middleware' => ['auth', 'level:2']], function () {
     Route::get('/admin/profile', 'Admin\DashboardController@profile')->name('admin.profile');
 
     // User Management Routes
-    Route::get('/admin/users', 'Admin\UserManagement@index')->name('admin.users')->middleware(['permission:users.list']);
-    Route::get('/admin/users/show/{id}', 'Admin\UserManagement@show')->name('admin.users.show')->middleware(['permission:users.show']);
-    Route::get('/admin/users/create', 'Admin\UserManagement@create')->name('admin.users.create')->middleware(['permission:users.create']);
-    Route::post('/admin/users/store', 'Admin\UserManagement@store')->middleware(['permission:users.create']);
-    Route::get('/admin/users/edit/{id}', 'Admin\UserManagement@edit')->name('admin.users.edit')->middleware(['permission:users.edit']);
-    Route::put('/admin/users/update/{id}', 'Admin\UserManagement@update')->middleware(['permission:users.edit']);
-    Route::put('/admin/users/detach/{user_id}/{model}/{id}', 'Admin\UserManagement@detach')->middleware(['permission:users.edit']);
-    Route::delete('/admin/users/delete/{id}', 'Admin\UserManagement@destroy')->middleware(['permission:users.delete']);
+    Route::get('/admin/users', 'Admin\UserManagement@index')->name('admin.users')->middleware(['role:root|permission:users.list']);
+    Route::get('/admin/users/show/{id}', 'Admin\UserManagement@show')->name('admin.users.show')->middleware(['role:root|permission:users.show']);
+    Route::get('/admin/users/create', 'Admin\UserManagement@create')->name('admin.users.create')->middleware(['role:root|permission:users.create']);
+    Route::post('/admin/users/store', 'Admin\UserManagement@store')->middleware(['role:root|permission:users.create']);
+    Route::get('/admin/users/edit/{id}', 'Admin\UserManagement@edit')->name('admin.users.edit')->middleware(['role:root|permission:users.edit']);
+    Route::put('/admin/users/update/{id}', 'Admin\UserManagement@update')->middleware(['role:root|permission:users.edit']);
+    Route::put('/admin/users/detach/{user_id}/{model}/{id}', 'Admin\UserManagement@detach')->middleware(['role:root|permission:users.edit']);
+    Route::delete('/admin/users/delete/{id}', 'Admin\UserManagement@destroy')->middleware(['role:root|permission:users.delete']);
     Route::get('/admin/users/trash', 'Admin\UserSoftDelete@index')->name('admin.users.trash')->middleware(['role:root']);
     Route::put('/admin/users/restore/{id}', 'Admin\UserSoftDelete@update')->middleware(['role:root']);
     Route::delete('/admin/users/destroy/{id}', 'Admin\UserSoftDelete@destroy')->middleware(['role:root']);

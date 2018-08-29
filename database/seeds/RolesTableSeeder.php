@@ -26,6 +26,33 @@ class RolesTableSeeder extends Seeder
 	            'description' => 'SuperUser Role',
 	            'level' => 5,
         	]);
+        }
+
+    	if (Role::where('slug', '=', 'admin')->first() === null) {
+	        $adminRole = Role::create([
+	            'name' => 'Administrator',
+	            'slug' => 'admin',
+	            'description' => 'Administrator Role',
+	            'level' => 4,
+        	]);
+	    }
+
+    	if (Role::where('slug', '=', 'moderator')->first() === null) {
+	        $adminRole = Role::create([
+	            'name' => 'Moderator',
+	            'slug' => 'moderator',
+	            'description' => 'Moderator Role',
+	            'level' => 3,
+        	]);
+	    }
+
+    	if (Role::where('slug', '=', 'editor')->first() === null) {
+	        $adminRole = Role::create([
+	            'name' => 'Editor',
+	            'slug' => 'editor',
+	            'description' => 'Editor Role',
+	            'level' => 2,
+        	]);
 	    }
 
     	if (Role::where('slug', '=', 'user')->first() === null) {

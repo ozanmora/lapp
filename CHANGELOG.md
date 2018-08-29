@@ -1,6 +1,11 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## 2018-09-29
+### Added
+* Added permission system to menu & routes.
+* Added error pages. (These will be remake.)
+
 ## 2018-09-27
 ### Added
 * Permission Management (CRUD) created.

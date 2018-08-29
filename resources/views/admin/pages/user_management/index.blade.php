@@ -16,9 +16,9 @@
                         {{ trans('admin.title.users') }}
                     @endslot
                     @slot('box_tools')
-                        @permission('users.create')
+                        @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.create')))
                             <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">{{ trans('admin.button.create') }}</a>
-                        @endpermission
+                        @endif
                         @role('root')
                             <a href="{{ route('admin.users.trash') }}" class="btn btn-sm btn-danger">{{ trans('admin.button.trash') }}</a>
                         @endrole
@@ -45,17 +45,17 @@
                                     <td class="text-center">{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td class="text-center">{{ $user->roles->first()->name or '-' }}</td>
+                                    <td class="text-center"><span class="label label-role_{{ $user->roles->first()->slug }}">{{ $user->roles->first()->name }}</span></td>
                                     <td class="text-center">{{ $user->created_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
-                                        @permission('users.show')
+                                        @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.show')))
                                             <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
-                                        @endpermission
-                                        @permission('users.edit')
+                                        @endif
+                                        @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.edit')))
                                             <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
-                                        @endpermission
-                                        @permission('users.delete')
-                                            <button class="btn btn-xs btn-danger"
+                                        @endif
+                                        @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.delete')))
+                                            <button class="btn btn-xs btn-danger @if($user->level() > Auth::user()->level() || (int) $user->id === (int) Auth::user()->id) disabled @endif "
                                                 data-confirm="DELETE"
                                                 data-confirm_form="delete-form-{{ $user->id }}"
                                                 data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
@@ -69,7 +69,7 @@
                                                 'id' => "delete-form-{$user->id}",
                                             ]) !!}
                                             {!! Form::close() !!}
-                                        @endpermission
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

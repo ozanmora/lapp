@@ -22748,13 +22748,22 @@ table.text-center th {
   position: absolute;
 }
 
+hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 .p-0 {
   padding: 0 !important;
 }
 
+.box {
+  border-top-width: 4px;
+}
+
 .box[class*='box-'] {
   border: 1px solid transparent;
-  border-top-width: 3px;
+  border-top-width: 4px;
 }
 
 .box.box-primary {
@@ -22779,5 +22788,69 @@ table.text-center th {
 
 .box.box-default {
   border-color: #d2d6de;
+}
+
+.label.label-level_0 {
+  background-color: #d2d6de;
+  color: #444;
+}
+
+.label.label-level_1 {
+  background-color: #a8abb1;
+  color: #444;
+}
+
+.label.label-level_2 {
+  background-color: #00a65a;
+  color: #fff;
+}
+
+.label.label-level_3 {
+  background-color: #009551;
+  color: #fff;
+}
+
+.label.label-level_4 {
+  background-color: #008448;
+  color: #fff;
+}
+
+.label.label-level_5 {
+  background-color: #00743e;
+  color: #fff;
+}
+
+.label[class*='label-role_'] {
+  background-color: #d2d6de;
+  color: #444;
+}
+
+.label.label-role_root {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.label.label-role_admin {
+  background-color: #c08a3e;
+  color: #fff;
+}
+
+.label.label-role_moderator {
+  background-color: #d89b46;
+  color: #fff;
+}
+
+.label.label-role_editor {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+
+.label.label-role_user {
+  background-color: #5bc0de;
+  color: #fff;
+}
+
+.label.label-role_unverified {
+  background-color: #d2d6de;
 }
 
