@@ -27,7 +27,7 @@
                             <th>{{ trans('role_management.column.name') }}</th>
                             <th>{{ trans('role_management.column.slug') }}</th>
                             <th width="150" class="text-center">{{ trans('role_management.column.level') }}</th>
-                            <th width="150" class="text-center">{{ trans('role_management.column.users') }}</th>
+                            <th width="150" class="text-center">{{ trans('role_management.column.relationships') }}</th>
                             <th width="150" class="text-center">{{ trans('admin.column.actions') }}</th>
                         </tr>
                     </thead>
@@ -41,7 +41,10 @@
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->slug }}</td>
                                     <td class="text-center">{{ $role->level }}</td>
-                                    <td class="text-center">{{ count($role->users) }}</td>
+                                    <td class="text-center">
+                                        <span data-toggle="tooltip" title="{{ trans('role_management.column.users') }}" class="label label-default">{{ count($role->users) }}</span>
+                                        <span data-toggle="tooltip" title="{{ trans('role_management.column.permissions') }}" class="label label-default">{{ count($role->permissions) }}</span>
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
                                         <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>

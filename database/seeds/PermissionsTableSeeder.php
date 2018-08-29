@@ -20,38 +20,47 @@ class PermissionsTableSeeder extends Seeder
 	     * Add Permissions
 	     *
 	     */
-        if (Permission::where('name', '=', 'Can View Users')->first() === null) {
+        if (Permission::where('slug', '=', 'users.list')->first() === null) {
 			Permission::create([
-			    'name' => 'Can View Users',
-			    'slug' => 'view.users',
-			    'description' => 'Can view users',
+			    'name' => 'User List',
+			    'slug' => 'users.list',
+			    'description' => 'Can list users',
 			    'model' => 'Permission',
 			]);
         }
 
-        if (Permission::where('name', '=', 'Can Create Users')->first() === null) {
+        if (Permission::where('slug', '=', 'users.show')->first() === null) {
 			Permission::create([
-			    'name' => 'Can Create Users',
-			    'slug' => 'create.users',
-			    'description' => 'Can create new users',
+			    'name' => 'View User',
+			    'slug' => 'users.show',
+			    'description' => 'Can view user detail',
 			    'model' => 'Permission',
 			]);
         }
 
-        if (Permission::where('name', '=', 'Can Edit Users')->first() === null) {
+        if (Permission::where('slug', '=', 'users.create')->first() === null) {
 			Permission::create([
-			    'name' => 'Can Edit Users',
-			    'slug' => 'edit.users',
-			    'description' => 'Can edit users',
+			    'name' => 'Create User',
+			    'slug' => 'users.create',
+			    'description' => 'Can create new user',
 			    'model' => 'Permission',
 			]);
         }
 
-        if (Permission::where('name', '=', 'Can Delete Users')->first() === null) {
+        if (Permission::where('slug', '=', 'users.edit')->first() === null) {
 			Permission::create([
-			    'name' => 'Can Delete Users',
-			    'slug' => 'delete.users',
-			    'description' => 'Can delete users',
+			    'name' => 'Edit User',
+			    'slug' => 'users.edit',
+			    'description' => 'Can edit user',
+			    'model' => 'Permission',
+			]);
+        }
+
+        if (Permission::where('slug', '=', 'users.delete')->first() === null) {
+			Permission::create([
+			    'name' => 'Delete User',
+			    'slug' => 'users.delete',
+			    'description' => 'Can delete user',
 			    'model' => 'Permission',
 			]);
         }

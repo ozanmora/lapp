@@ -37,6 +37,10 @@
                     {{ Form::label('description', trans('role_management.field.description')) }}
                     {{ Form::text('description', $role->description, ['class' => 'form-control', 'placeholder' => trans('role_management.placeholder.description')]) }}
                 </div>
+                <div class="form-group">
+                    {{ Form::label('permissions', trans('role_management.field.permissions')) }}
+                    {{ Form::select('permissions[]', $permissions, $selected_permissions, ['id' => 'permissions', 'class' => 'form-control select2', 'multiple' => 'multiple']) }}
+                </div>
             @endcomponent
         </div>
     </div>

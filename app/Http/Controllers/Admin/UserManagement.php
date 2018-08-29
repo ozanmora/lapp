@@ -13,16 +13,6 @@ use Auth;
 class UserManagement extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -41,7 +31,7 @@ class UserManagement extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::orderBy('level', 'desc')->get();
 
         $option_roles = array();
         foreach ($roles as $role) {
@@ -77,8 +67,7 @@ class UserManagement extends Controller
 
         $user->save();
 
-        $user->detachAllRoles();
-        $user->attachRole($request->role);
+        $user->syncRoles([$request->role]);
 
         $user->save();
 
@@ -107,7 +96,7 @@ class UserManagement extends Controller
     public function edit($id)
     {
         $user  = User::findOrFail($id);
-        $roles = Role::all();
+        $roles = Role::orderBy('level', 'desc')->get();
 
         $current_role = ($user->roles->isEmpty()) ? null : $user->roles->first()->id;
 
@@ -142,14 +131,14 @@ class UserManagement extends Controller
         ]);
 
         $user = User::findOrFail($id);
+
         $user->name = $request->name;
         $user->email = $request->email;
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
 
-        $user->detachAllRoles();
-        $user->attachRole($request->role);
+        $user->syncRoles([$request->role]);
 
         $user->save();
 

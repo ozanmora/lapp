@@ -9,19 +9,10 @@ use App\Models\User;
 use jeremykenedy\LaravelRoles\Models\Role;
 use jeremykenedy\LaravelRoles\Models\Permission;
 use Auth;
+use Illuminate\Support\Facades\Log;
 
 class RoleManagement extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -41,8 +32,18 @@ class RoleManagement extends Controller
      */
     public function create()
     {
+        $permissions = Permission::orderBy('slug', 'asc')->get();
 
-        return view('admin.pages.role_management.create');
+        $option_permisisons = array();
+        foreach ($permissions as $permission) {
+            $option_permisisons[$permission->id] = $permission->name;
+        }
+
+        $data = [
+            'permissions' => $option_permisisons,
+        ];
+
+        return view('admin.pages.role_management.create', $data);
     }
 
     /**
@@ -63,9 +64,13 @@ class RoleManagement extends Controller
         $role = Role::create([
             'name' => $request->name,
             'slug' => $request->slug,
-            'description' => ($request->has('description')) ? $request->description : null,
+            'description' => $request->description,
             'level' => $request->level,
         ]);
+
+        $role->save();
+
+        $role->syncPermissions($request->permissions);
 
         $role->save();
 
@@ -98,9 +103,24 @@ class RoleManagement extends Controller
     public function edit($id)
     {
         $role = Role::findOrFail($id);
+        $permissions = Permission::orderBy('slug', 'asc')->get();
+
+        $option_permisisons = array();
+        foreach ($permissions as $permission) {
+            $option_permisisons[$permission->id] = $permission->name;
+        }
+
+        $selected_permissions = array();
+        if (count($role->permissions) > 0) {
+            foreach ($role->permissions as $permission) {
+                $selected_permissions[] = $permission->id;
+            }
+        }
 
         $data = [
             'role' => $role,
+            'permissions' => $option_permisisons,
+            'selected_permissions' => $selected_permissions
         ];
 
         return view('admin.pages.role_management.edit', $data);
@@ -127,9 +147,11 @@ class RoleManagement extends Controller
         $role->name = $request->name;
         $role->slug = $request->slug;
         $role->level = $request->level;
-        if ($request->has('description')) {
+        if ($request->filled('description')) {
             $role->description = $request->description;
         }
+
+        $role->syncPermissions($request->permissions);
 
         $role->save();
 
@@ -159,5 +181,38 @@ class RoleManagement extends Controller
 
         return redirect()->route('admin.roles')->with('success', trans('role_management.message.success_delete'));
 
+    }
+
+    /**
+     * Detach the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $role_id
+     * @param  string  $model
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detach(Request $request, $role_id, $model, $id)
+    {
+        $role = Role::findOrFail($role_id);
+
+        switch ($model) {
+            case 'permission':
+                $permission = Permission::findOrFail($id);
+                $role->detachPermission($permission);
+                $role->save();
+
+                return redirect()->route('admin.roles.show', $role)->with('success', trans('role_management.message.success_detach_permission'));
+                break;
+            case 'user':
+                $user = User::findOrFail($id);
+                $user->detachRole($role);
+                $user->save();
+
+                return redirect()->route('admin.roles.show', $role)->with('success', trans('role_management.message.success_detach_user'));
+                break;
+        }
+
+        return back()->with('error', trans('role_management.message.error_undefined'));
     }
 }

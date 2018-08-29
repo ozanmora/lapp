@@ -13,16 +13,6 @@ use Auth;
 class PermissionManagement extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -63,8 +53,8 @@ class PermissionManagement extends Controller
         $permission = Permission::create([
             'name' => $request->name,
             'slug' => $request->slug,
-            'description' => ($request->has('description')) ? $request->description : null,
-            'model' => ($request->has('model')) ? $request->description : null,
+            'description' => $request->description,
+            'model' => $request->model,
         ]);
 
         $permission->save();
@@ -126,12 +116,8 @@ class PermissionManagement extends Controller
 
         $permission->name = $request->name;
         $permission->slug = $request->slug;
-        if ($request->has('description')) {
-            $permission->description = $request->description;
-        }
-        if ($request->has('model')) {
-            $permission->model = $request->model;
-        }
+        $permission->description = $request->description;
+        $permission->model = $request->model;
 
         $permission->save();
 
@@ -163,5 +149,38 @@ class PermissionManagement extends Controller
 
         return redirect()->route('admin.permissions')->with('success', trans('permission_management.message.success_delete'));
 
+    }
+
+    /**
+     * Detach the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $permission_id
+     * @param  string  $model
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detach(Request $request, $permission_id, $model, $id)
+    {
+        $permission = Permission::findOrFail($permission_id);
+
+        switch ($model) {
+            case 'role':
+                $role = Role::findOrFail($id);
+                $role->detachPermission($permission);
+                $role->save();
+
+                return redirect()->route('admin.permissions.show', $permission)->with('success', trans('permission_management.message.success_detach_role'));
+                break;
+            case 'user':
+                $user = User::findOrFail($id);
+                $user->detachPermission($permission);
+                $user->save();
+
+                return redirect()->route('admin.permissions.show', $permission)->with('success', trans('permission_management.message.success_detach_user'));
+                break;
+        }
+
+        return back()->with('error', trans('permission_management.message.error_undefined'));
     }
 }

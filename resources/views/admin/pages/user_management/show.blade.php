@@ -14,26 +14,30 @@
                 <img class="profile-user-img img-responsive img-circle" src="{{ Gravatar::get($user->email, ['size' => 160]) }}" alt="">
                 <h3 class="profile-username text-center">
                     {{ $user->name }}
-                    <span class="label bg-gray">{{ $user->roles->first()->name or null }}</span>
+                    <span class="label label-default">{{ $user->roles->first()->name or null }}</span>
                 </h3>
 
                 <p class="text-muted text-center">{{ $user->email }}</p>
                 @slot('footer')
                 <div class="clearfix text-center">
-                    <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-md btn-warning pull-left">@lang('admin.icon.edit') @lang('admin.button.edit')</a>
-                    <button class="btn btn-md btn-danger pull-right"
-                        data-confirm="DELETE"
-                        data-confirm_form="delete-form-{{ $user->id }}"
-                        data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
-                        data-confirm_message="{{ trans('user_management.confirm.message_trash') }}">
-                        @lang('admin.icon.delete') @lang('admin.button.delete')</button>
-                    {!! Form::open([
-                        'action' => ['Admin\UserManagement@destroy', $user],
-                        'method' => 'DELETE',
-                        'class' => 'delete-form hide',
-                        'id' => "delete-form-{$user->id}",
-                    ]) !!}
-                    {!! Form::close() !!}
+                    @permission('users.edit')
+                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-md btn-warning pull-left">@lang('admin.icon.edit') @lang('admin.button.edit')</a>
+                    @endpermission
+                    @permission('users.delete')
+                        <button class="btn btn-md btn-danger pull-right"
+                            data-confirm="DELETE"
+                            data-confirm_form="delete-form-{{ $user->id }}"
+                            data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
+                            data-confirm_message="{{ trans('user_management.confirm.message_trash') }}">
+                            @lang('admin.icon.delete') @lang('admin.button.delete')</button>
+                        {!! Form::open([
+                            'action' => ['Admin\UserManagement@destroy', $user],
+                            'method' => 'DELETE',
+                            'class' => 'delete-form hide',
+                            'id' => "delete-form-{$user->id}",
+                        ]) !!}
+                        {!! Form::close() !!}
+                    @endpermission
                 </div>
                 @endslot
             @endcomponent

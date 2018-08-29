@@ -16,8 +16,12 @@
                         {{ trans('admin.title.users') }}
                     @endslot
                     @slot('box_tools')
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">{{ trans('admin.button.create') }}</a>
-                        <a href="{{ route('admin.users.trash') }}" class="btn btn-sm btn-danger">{{ trans('admin.button.trash') }}</a>
+                        @permission('users.create')
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">{{ trans('admin.button.create') }}</a>
+                        @endpermission
+                        @role('root')
+                            <a href="{{ route('admin.users.trash') }}" class="btn btn-sm btn-danger">{{ trans('admin.button.trash') }}</a>
+                        @endrole
                     @endslot
                 @endslot
 
@@ -44,22 +48,28 @@
                                     <td class="text-center">{{ $user->roles->first()->name or '-' }}</td>
                                     <td class="text-center">{{ $user->created_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
-                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
-                                        <button class="btn btn-xs btn-danger"
-                                            data-confirm="DELETE"
-                                            data-confirm_form="delete-form-{{ $user->id }}"
-                                            data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
-                                            data-confirm_message="{{ trans('user_management.confirm.message_trash') }}"
-                                            data-toggle="tooltip"
-                                            title="{{ trans('admin.button.trash') }}">{!! trans('admin.icon.trash') !!}</button>
-                                        {!! Form::open([
-                                            'action' => ['Admin\UserManagement@destroy', $user],
-                                            'method' => 'DELETE',
-                                            'class' => 'delete-form hide',
-                                            'id' => "delete-form-{$user->id}",
-                                        ]) !!}
-                                        {!! Form::close() !!}
+                                        @permission('users.show')
+                                            <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
+                                        @endpermission
+                                        @permission('users.edit')
+                                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                        @endpermission
+                                        @permission('users.delete')
+                                            <button class="btn btn-xs btn-danger"
+                                                data-confirm="DELETE"
+                                                data-confirm_form="delete-form-{{ $user->id }}"
+                                                data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
+                                                data-confirm_message="{{ trans('user_management.confirm.message_trash') }}"
+                                                data-toggle="tooltip"
+                                                title="{{ trans('admin.button.trash') }}">{!! trans('admin.icon.trash') !!}</button>
+                                            {!! Form::open([
+                                                'action' => ['Admin\UserManagement@destroy', $user],
+                                                'method' => 'DELETE',
+                                                'class' => 'delete-form hide',
+                                                'id' => "delete-form-{$user->id}",
+                                            ]) !!}
+                                            {!! Form::close() !!}
+                                        @endpermission
                                     </td>
                                 </tr>
                             @endforeach

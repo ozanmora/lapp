@@ -22752,3 +22752,32 @@ table.text-center th {
   padding: 0 !important;
 }
 
+.box[class*='box-'] {
+  border: 1px solid transparent;
+  border-top-width: 3px;
+}
+
+.box.box-primary {
+  border-color: #3c8dbc;
+}
+
+.box.box-info {
+  border-color: #00c0ef;
+}
+
+.box.box-danger {
+  border-color: #dd4b39;
+}
+
+.box.box-warning {
+  border-color: #f39c12;
+}
+
+.box.box-success {
+  border-color: #00a65a;
+}
+
+.box.box-default {
+  border-color: #d2d6de;
+}
+

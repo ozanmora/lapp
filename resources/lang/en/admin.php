@@ -4,6 +4,7 @@ return [
     'menu' => [
         'header'                => 'Main Navigation',
         'dashboard'             => 'Dashboard',
+        'system'                => 'System Settings',
         'user_management'       => 'User Management',
         'role_management'       => 'Role Management',
         'permission_management' => 'Permission Management',
@@ -18,6 +19,7 @@ return [
         'trash'                 => '<i class="fa fa-fw fa-trash-o"></i>',
         'delete'                => '<i class="fa fa-fw fa-trash-o"></i>',
         'restore'               => '<i class="fa fa-fw fa-refresh"></i>',
+        'detach'                => '<i class="fa fa-fw fa-chain-broken"></i>',
         'save'                  => '<i class="fa fa-fw fa-save"></i>',
         'back'                  => '<i class="fa fa-fw fa-back"></i>',
         'profile'               => '<i class="fa fa-fw fa-id-card"></i>',
@@ -65,6 +67,7 @@ return [
         'trash'     => 'Trash',
         'delete'    => 'Delete',
         'restore'   => 'Restore',
+        'detach'    => 'Detach',
         'save'      => 'Save',
         'back'      => 'Back',
         'profile'   => 'Profile',

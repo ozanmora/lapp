@@ -3,9 +3,11 @@
         <li@lm-attrs($item) @if($item->hasChildren())class="treeview"@endif @lm-endattrs>
             @if($item->link)
                 <a@lm-attrs($item->link) @lm-endattrs href="{!! $item->url() !!}">
-                    @if (stripos($item->title, 'fa') === FALSE)
-                        @lang('admin.icon.menu_default')
-                    @endif
+                    @empty($item->data['icon'])
+                        {!! trans('admin.icon.menu_default') !!}
+                    @else
+                        {!! $item->data['icon'] !!}
+                    @endempty
                     {!! $item->title !!}
                     @if($item->hasChildren())
                         <span class="pull-right-container">
@@ -23,7 +25,7 @@
             @endif
         </li>
         @if($item->divider)
-            <li{!! Lavary\Menu\Builder::attributes($item->divider) !!}></li>
+            <li{!! Lavary\Menu\Builder::attributes($item->divider) !!}>{!! $item->divider['title'] !!}</li>
         @endif
     @endforeach
 @endif

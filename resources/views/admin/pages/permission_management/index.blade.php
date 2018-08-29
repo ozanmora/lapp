@@ -27,6 +27,7 @@
                             <th>{{ trans('permission_management.column.name') }}</th>
                             <th>{{ trans('permission_management.column.slug') }}</th>
                             <th>{{ trans('permission_management.column.model') }}</th>
+                            <th width="150" class="text-center">{{ trans('permission_management.column.relationships') }}</th>
                             <th width="150" class="text-center">{{ trans('admin.column.actions') }}</th>
                         </tr>
                     </thead>
@@ -40,6 +41,9 @@
                                     <td>{{ $permission->name }}</td>
                                     <td>{{ $permission->slug }}</td>
                                     <td>{{ $permission->model }}</td>
+                                    <td class="text-center">
+                                        <span data-toggle="tooltip" title="{{ trans('permission_management.column.roles') }}" class="label label-default">{{ count($permission->roles) }}</span>
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.permissions.show', $permission) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
                                         <a href="{{ route('admin.permissions.edit', $permission) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
