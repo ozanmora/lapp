@@ -1,47 +1,26 @@
-@extends('layouts.app')
+@extends('templates.adminlte.layouts.auth')
+
+@section('title', trans('auth.title.forgot_password'))
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <div class="login-box-body">
+        @include('templates.adminlte.partials.alerts')
+        <p class="login-box-msg">{{ trans('auth.message.forgot_password') }}</p>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}" aria-label="{{ __('Reset Password') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+        {!! Form::open(['route' => 'password.email', 'method' => 'POST']) !!}
+            <div class="form-group has-feedback">
+                {!! Form::email('email', null, ['class' => 'form-control' , 'placeholder' => trans('auth.placeholder.email')]) !!}
+                {!! trans('auth.icon.email') !!}
             </div>
+            <div class="clearfix">
+                {!! Form::button(trans('auth.button.forgot_password'), ['type' => 'submit', 'class' => 'btn btn-block btn-flat btn-primary']) !!}
+            </div>
+        {!! Form::close() !!}
+        <div class="text-center">
+            <p>- {{ __('OR') }} -</p>
+            <a class="btn btn-link" href="{{ route('login') }}">{{ trans('auth.text.login') }}</a><br>
+            <a class="btn btn-link" href="{{ route('register') }}">{{ trans('auth.text.register') }}</a>
         </div>
     </div>
-</div>
+    <!-- /.login-box-body -->
 @endsection

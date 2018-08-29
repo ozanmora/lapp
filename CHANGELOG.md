@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 * Added permission system to menu & routes.
 * Added error pages. (These will be remake.)
 
+## Updated
+* Updated Auth pages. (Login, Register, Forgot Password, Reset Password)
+
 ## 2018-09-27
 ### Added
 * Permission Management (CRUD) created.

@@ -55,5 +55,7 @@
         background-image: url(/images/vendor/icheck/skins/square/blue@2x.png?2694acfdd21dfca86aa67beac8e0a108);
         background-size: 240px 24px;
     }
+}.login-box-body form {
+  margin-bottom: 10px;
 }
 
