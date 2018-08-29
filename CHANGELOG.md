@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 ## 2018-09-29
 ### Added
 * Added permission system to menu & routes.
-* Added error pages. (These will be remake.)
+* Added error pages.
 
 ## Updated
+* Updated Welcome page.
 * Updated Auth pages. (Login, Register, Forgot Password, Reset Password)
 
 ## 2018-09-27
