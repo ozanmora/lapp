@@ -1,6 +1,11 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## v1.0.1 - 2019-02-28
+### Updated
+* Updated npm packages.
+* Updated .gitignore file.
+
 ## 2018-09-29
 ### Added
 * Added permission system to menu & routes.
