@@ -68,6 +68,19 @@ foo@bar:~$ npm run dev
 ```
 If you have not received any errors during this process, the progeny will work smoothly.
 
+## Usage
+
+```
+username: root@root.com
+password: password
+-
+username: admin@admin.com
+password: password
+-
+username: user@user.com
+password: password
+```
+
 ### [ChangeLog](https://github.com/ozanmora/lapp/blob/master/README.md)
 ### [License](https://github.com/ozanmora/lapp/blob/master/LICENSE)
 
