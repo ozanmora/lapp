@@ -1,6 +1,20 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## v1.0.3 - 2020-02-19
+### Updated
+* Updated npm packages.
+* Updated composer packages.
+* Updated .gitignore file.
+
+## v1.0.2 - 2019-03-01
+### Updated
+* Updated npm packages.
+* Updated .gitignore file.
+
+## Deleted
+* package-lock.json
+
 ## v1.0.1 - 2019-02-28
 ### Updated
 * Updated npm packages.
