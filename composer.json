@@ -1,7 +1,10 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -10,7 +13,7 @@
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "fideloper/proxy": "^4.0",
         "jeremykenedy/laravel-roles": "^1.2",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "^5.8.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4.0",
         "lavary/laravel-menu": "^1.7"
@@ -38,8 +41,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {

@@ -7,11 +7,11 @@
 > **NOTE:** This project on Development Mode. You may encounter many errors while using it.
 
 ## Features
-#### A [Laravel](http://laravel.com/) 5.6.x with [AdminLTE](https://adminlte.io) 2.4.x project.
+#### A [Laravel](http://laravel.com/) 5.8.x with [AdminLTE](https://adminlte.io) 2.4.x project.
 
 | Feature Details  |
 | :------------ |
-|Built on [Laravel](http://laravel.com/) 5.6.x|
+|Built on [Laravel](http://laravel.com/) 5.8.x|
 |Built on [AdminLTE](https://adminlte.io) 2.4.x|
 |Uses [PHP](https://php.net) 7.2.x|
 |Uses [MySQL](https://github.com/mysql) 5.6.x Database|
