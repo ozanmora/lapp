@@ -46,7 +46,7 @@ foo@bar:~$ cp .env.example .env
 5. Configure your `.env` file
 6. Now run the following codes in the project root folder
 ```console
-foo@bar:~$ composer update
+foo@bar:~$ composer install
 ```
 ```console
 foo@bar:~$ php artisan key:generate
