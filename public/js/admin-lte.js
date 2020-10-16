@@ -3215,9 +3215,9 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/ozanmora/Sites/mora/lapp/resources/assets/js/admin-lte.js */"./resources/assets/js/admin-lte.js");
-__webpack_require__(/*! /Users/ozanmora/Sites/mora/lapp/resources/assets/sass/admin-lte.scss */"./resources/assets/sass/admin-lte.scss");
-module.exports = __webpack_require__(/*! /Users/ozanmora/Sites/mora/lapp/resources/assets/sass/auth.scss */"./resources/assets/sass/auth.scss");
+__webpack_require__(/*! /Users/ozanmora/Sites/github/lapp/resources/assets/js/admin-lte.js */"./resources/assets/js/admin-lte.js");
+__webpack_require__(/*! /Users/ozanmora/Sites/github/lapp/resources/assets/sass/admin-lte.scss */"./resources/assets/sass/admin-lte.scss");
+module.exports = __webpack_require__(/*! /Users/ozanmora/Sites/github/lapp/resources/assets/sass/auth.scss */"./resources/assets/sass/auth.scss");
 
 
 /***/ })
