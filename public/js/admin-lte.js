@@ -2570,6 +2570,28 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
+/***/ "./node_modules/is-buffer/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/is-buffer/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/node-libs-browser/node_modules/timers-browserify/main.js":
 /*!*******************************************************************************!*\
   !*** ./node_modules/node-libs-browser/node_modules/timers-browserify/main.js ***!
@@ -3215,9 +3237,9 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/lapp.local/resources/assets/js/admin-lte.js */"./resources/assets/js/admin-lte.js");
-__webpack_require__(/*! /var/www/lapp.local/resources/assets/sass/admin-lte.scss */"./resources/assets/sass/admin-lte.scss");
-module.exports = __webpack_require__(/*! /var/www/lapp.local/resources/assets/sass/auth.scss */"./resources/assets/sass/auth.scss");
+__webpack_require__(/*! /Users/omora/Sites/lapp.lan/resources/assets/js/admin-lte.js */"./resources/assets/js/admin-lte.js");
+__webpack_require__(/*! /Users/omora/Sites/lapp.lan/resources/assets/sass/admin-lte.scss */"./resources/assets/sass/admin-lte.scss");
+module.exports = __webpack_require__(/*! /Users/omora/Sites/lapp.lan/resources/assets/sass/auth.scss */"./resources/assets/sass/auth.scss");
 
 
 /***/ })
