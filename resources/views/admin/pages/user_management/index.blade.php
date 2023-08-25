@@ -17,7 +17,8 @@
                     @endslot
                     @slot('box_tools')
                         @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.create')))
-                            <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">{{ trans('admin.button.create') }}</a>
+                            <a href="{{ route('admin.users.create') }}"
+                                class="btn btn-sm btn-primary">{{ trans('admin.button.create') }}</a>
                         @endif
                         @role('root')
                             <a href="{{ route('admin.users.trash') }}" class="btn btn-sm btn-danger">{{ trans('admin.button.trash') }}</a>
@@ -37,38 +38,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($users) === 0)
-                            <tr><td colspan="6" class="text-center">{{ trans('admin.table_no_record') }}</td></tr>
+                        @if (count($users) === 0)
+                            <tr>
+                                <td colspan="6" class="text-center">{{ trans('admin.table_no_record') }}</td>
+                            </tr>
                         @else
                             @foreach ($users as $user)
                                 <tr>
                                     <td class="text-center">{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td class="text-center"><span class="label label-role_{{ $user->roles->first()->slug }}">{{ $user->roles->first()->name }}</span></td>
+                                    <td class="text-center">
+                                        @if ($user->roles->first())
+                                            <span
+                                                class="label label-role_{{ $user->roles->first()->slug }}">{{ $user->roles->first()->name }}</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">{{ $user->created_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
-                                        @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.show')))
-                                            <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
+                                        @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.view')))
+                                            <a href="{{ route('admin.users.view', $user) }}" class="btn btn-xs btn-info"
+                                                data-toggle="tooltip"
+                                                title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
                                         @endif
                                         @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.edit')))
-                                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning"
+                                                data-toggle="tooltip"
+                                                title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
                                         @endif
                                         @if (Auth::check() && (Auth::user()->hasRole('root') || Auth::user()->hasPermission('users.delete')))
-                                            <button class="btn btn-xs btn-danger @if($user->level() > Auth::user()->level() || (int) $user->id === (int) Auth::user()->id) disabled @endif "
-                                                data-confirm="DELETE"
-                                                data-confirm_form="delete-form-{{ $user->id }}"
+                                            <button
+                                                class="btn btn-xs btn-danger @if ($user->level() > Auth::user()->level() || (int) $user->id === (int) Auth::user()->id) disabled @endif "
+                                                data-confirm="DELETE" data-confirm_form="delete-form-{{ $user->id }}"
                                                 data-confirm_title="{{ trans_choice('user_management.confirm.title_trash', 1, ['name' => $user->name]) }}"
                                                 data-confirm_message="{{ trans('user_management.confirm.message_trash') }}"
                                                 data-toggle="tooltip"
                                                 title="{{ trans('admin.button.trash') }}">{!! trans('admin.icon.trash') !!}</button>
-                                            {!! Form::open([
-                                                'action' => ['Admin\UserManagement@destroy', $user],
-                                                'method' => 'DELETE',
-                                                'class' => 'delete-form hide',
-                                                'id' => "delete-form-{$user->id}",
-                                            ]) !!}
-                                            {!! Form::close() !!}
+                                            {{ html()->form('DELETE', route('admin.users.delete', $user))->class('delete-form hide')->id("delete-form-{$user->id}")->open() }}
+                                            {{ html()->form()->close() }}
                                         @endif
                                     </td>
                                 </tr>

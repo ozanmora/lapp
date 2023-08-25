@@ -28,8 +28,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($users) === 0)
-                            <tr><td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td></tr>
+                        @if (count($users) === 0)
+                            <tr>
+                                <td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td>
+                            </tr>
                         @else
                             @foreach ($users as $user)
                                 <tr>
@@ -38,51 +40,39 @@
                                     <td>{{ $user->email }}</td>
                                     <td class="text-center">{{ $user->deleted_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-xs btn-success"
-                                            data-confirm="RESTORE"
+                                        <button class="btn btn-xs btn-success" data-confirm="RESTORE"
                                             data-confirm_form="restore-form-{{ $user->id }}"
                                             data-confirm_title="{{ trans_choice('user_management.confirm.title_restore', 1, ['name' => $user->name]) }}"
                                             data-confirm_message="{{ trans('user_management.confirm.message_restore') }}"
                                             data-toggle="tooltip"
                                             title="{{ trans('admin.button.restore') }}">{!! trans('admin.icon.restore') !!}</button>
-                                        {!! Form::open([
-                                            'action' => ['Admin\UserSoftDelete@update', $user],
-                                            'method' => 'PUT',
-                                            'class' => 'restore-form hide',
-                                            'id' => "restore-form-{$user->id}",
-                                        ]) !!}
-                                        {!! Form::close() !!}
-                                        <button class="btn btn-xs btn-danger"
-                                            data-confirm="DELETE"
+                                        {{ html()->form('PUT', route('admin.users.restore', $user))->class('restore-form hide')->id("restore-form-{$user->id}")->open() }}
+                                        {{ html()->form()->close() }}
+                                        <button class="btn btn-xs btn-danger" data-confirm="DELETE"
                                             data-confirm_form="delete-form-{{ $user->id }}"
                                             data-confirm_title="{{ trans_choice('user_management.confirm.title_delete', 1, ['name' => $user->name]) }}"
                                             data-confirm_message="{{ trans('user_management.confirm.message_delete') }}"
                                             data-toggle="tooltip"
                                             title="{{ trans('admin.button.delete') }}">{!! trans('admin.icon.delete') !!}</button>
-                                        {!! Form::open([
-                                            'action' => ['Admin\UserSoftDelete@destroy', $user],
-                                            'method' => 'DELETE',
-                                            'class' => 'delete-form hide',
-                                            'id' => "delete-form-{$user->id}",
-                                        ]) !!}
-                                        {!! Form::close() !!}
+                                        {{ html()->form('DELETE', route('admin.users.destroy', $user))->class('delete-form hide')->id("delete-form-{$user->id}")->open() }}
+                                        {{ html()->form()->close() }}
                                     </td>
                                 </tr>
                             @endforeach
                         @endempty
-                    </tbody>
-                </table>
-                @if ($users->total() > $users->perPage())
-                    @slot('footer')
-                        {{ $users->links('admin.partials.pagination') }}
-                    @endslot
-                @endif
-            @endcomponent
-        </div>
+                </tbody>
+            </table>
+            @if ($users->total() > $users->perPage())
+                @slot('footer')
+                    {{ $users->links('admin.partials.pagination') }}
+                @endslot
+            @endif
+        @endcomponent
     </div>
+</div>
 @endsection
 
 @section('footer_scripts')
-    @parent
-    @include('admin.scripts.modal_confirm')
+@parent
+@include('admin.scripts.modal_confirm')
 @endsection

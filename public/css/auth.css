@@ -9,7 +9,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(/images/vendor/icheck/skins/square/blue.png?96f8a9053c5b1ab49111b9e243fd5c38) no-repeat;
+    background: url(/images/vendor/icheck/skins/square/blue.png?47dfe954bc521a5356050b61b12c0cd0) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -52,10 +52,12 @@
 @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-blue,
     .iradio_square-blue {
-        background-image: url(/images/vendor/icheck/skins/square/blue@2x.png?2694acfdd21dfca86aa67beac8e0a108);
+        background-image: url(/images/vendor/icheck/skins/square/blue@2x.png?eb5592d094a6555c844bc1ba04c7259e);
         background-size: 240px 24px;
     }
-}.login-box-body form {
+}
+.login-box-body form {
   margin-bottom: 10px;
 }
+
 

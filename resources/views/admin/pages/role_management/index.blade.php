@@ -32,36 +32,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($roles) === 0)
-                            <tr><td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td></tr>
+                        @if (count($roles) === 0)
+                            <tr>
+                                <td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td>
+                            </tr>
                         @else
                             @foreach ($roles as $role)
                                 <tr>
                                     <td class="text-center">{{ $role->id }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td><span class="label label-role_{{ $role->slug }}">{{ $role->name }}</span></td>
-                                    <td class="text-center"><span class="label label-level_{{ $role->level }}">{{ $role->level }}</span></td>
+                                    <td class="text-center"><span
+                                            class="label label-level_{{ $role->level }}">{{ $role->level }}</span></td>
                                     <td class="text-center">
-                                        <span data-toggle="tooltip" title="{{ trans('role_management.column.users') }}" class="label label-default">{{ count($role->users) }}</span>
-                                        <span data-toggle="tooltip" title="{{ trans('role_management.column.permissions') }}" class="label label-default">{{ count($role->permissions) }}</span>
+                                        <span data-toggle="tooltip" title="{{ trans('role_management.column.users') }}"
+                                            class="label label-default">{{ count($role->users) }}</span>
+                                        <span data-toggle="tooltip" title="{{ trans('role_management.column.permissions') }}"
+                                            class="label label-default">{{ count($role->permissions) }}</span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
-                                        <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                        <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-xs btn-info"
+                                            data-toggle="tooltip"
+                                            title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
+                                        <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-xs btn-warning"
+                                            data-toggle="tooltip"
+                                            title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
                                         <button class="btn btn-xs btn-danger @if ($role->slug === 'root') disabled @endif"
-                                                data-confirm="DELETE"
-                                                data-confirm_form="delete-form-{{ $role->id }}"
-                                                data-confirm_title="{{ trans_choice('role_management.confirm.title_delete', 1, ['name' => $role->name]) }}"
-                                                data-confirm_message="{{ trans('role_management.confirm.message_delete') }}"
-                                                data-toggle="tooltip"
-                                                title="{{ trans('admin.button.delete') }}">{!! trans('admin.icon.delete') !!}</button>
-                                        {!! Form::open([
-                                            'action' => ['Admin\RoleManagement@destroy', $role],
-                                            'method' => 'DELETE',
-                                            'class' => 'delete-form hide',
-                                            'id' => "delete-form-{$role->id}",
-                                        ]) !!}
-                                        {!! Form::close() !!}
+                                            data-confirm="DELETE" data-confirm_form="delete-form-{{ $role->id }}"
+                                            data-confirm_title="{{ trans_choice('role_management.confirm.title_delete', 1, ['name' => $role->name]) }}"
+                                            data-confirm_message="{{ trans('role_management.confirm.message_delete') }}"
+                                            data-toggle="tooltip"
+                                            title="{{ trans('admin.button.delete') }}">{!! trans('admin.icon.delete') !!}</button>
+                                        {{ html()->form('DELETE', route('admin.roles.destroy', $role))->class('delete-form hide')->id("delete-form-{$role->id}")->open() }}
+                                        {{ html()->form()->close() }}
                                     </td>
                                 </tr>
                             @endforeach
