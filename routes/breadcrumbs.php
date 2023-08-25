@@ -30,14 +30,14 @@ Breadcrumbs::for('admin.users.create', function ($trail) {
 });
 
 // Admin User Show
-Breadcrumbs::for('admin.users.show', function ($trail, $user) {
+Breadcrumbs::for('admin.users.view', function ($trail, $user) {
     $trail->parent('admin.user_management');
-    $trail->push($user->name, route('admin.users.show', $user));
+    $trail->push($user->name, route('admin.users.view', $user));
 });
 
 // Admin User Edit
 Breadcrumbs::for('admin.users.edit', function ($trail, $user) {
-    $trail->parent('admin.users.show', $user);
+    $trail->parent('admin.users.view', $user);
     $trail->push(trans('admin.breadcrumb.edit'), route('admin.users.edit', $user));
 });
 

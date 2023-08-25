@@ -8,7 +8,7 @@
 @section('breadcrumbs', Breadcrumbs::render('admin.users.edit', $user))
 
 @section('content')
-{!! Form::open(['action' => [ 'Admin\UserManagement@update', $user ], 'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
+    {{ html()->form('PUT', route('admin.users.update', $user))->open() }}
     <div class="row">
         <div class="col-xs-12">
             @component('templates.adminlte.components.box')
@@ -18,38 +18,46 @@
                     @endslot
                 @endslot
                 @slot('box_tools')
-                    {{ Form::submit(trans('admin.button.save'), ['class' => 'btn btn-sm btn-primary']) }}
+                    {{ html()->submit(trans('admin.button.save'))->class('btn btn-sm btn-primary') }}
                     <a href="{{ url()->previous() }}" class="btn btn-sm btn-default">{{ trans('admin.button.back') }}</a>
                 @endslot
-                <div class="form-group">
-                    {{ Form::label('name', trans('user_management.field.name')) }}
-                    {{ Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => trans('user_management.placeholder.name')]) }}
+                <div class="form-group @error('name') has-error @enderror">
+                    {{ html()->label(trans('user_management.field.name'), 'name') }}
+                    {{ html()->text('name', $user->name)->class('form-control')->placeholder(trans('user_management.placeholder.name')) }}
+                    @error('name')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
                 </div>
-                <div class="form-group">
-                    {{ Form::label('email', trans('user_management.field.email')) }}
-                    {{ Form::email('email', $user->email, ['class' => 'form-control', 'placeholder' => trans('user_management.placeholder.email')]) }}
+                <div class="form-group @error('email') has-error @enderror">
+                    {{ html()->label(trans('user_management.field.email'), 'email') }}
+                    {{ html()->email('email', $user->email)->class('form-control')->placeholder(trans('user_management.placeholder.email')) }}
+                    @error('email')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
                 </div>
-                <div class="form-group">
-                    {{ Form::label('password', trans('user_management.field.password')) }}
-                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => trans('user_management.placeholder.password')]) }}
+                <div class="form-group @error('password') has-error @enderror">
+                    {{ html()->label(trans('user_management.field.password'), 'password') }}
+                    {{ html()->password('password', null)->class('form-control')->placeholder(trans('user_management.placeholder.password'))->attributes(['autocomplete' => 'off']) }}
+                    @error('password')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
                 </div>
-                <div class="form-group">
-                    {{ Form::label('password_confirmation', trans('user_management.field.password_confirmation')) }}
-                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => trans('user_management.placeholder.password_confirmation')]) }}
+                <div class="form-group @error('password_confirmation') has-error @enderror">
+                    {{ html()->label(trans('user_management.field.password_confirmation'), 'password_confirmation') }}
+                    {{ html()->password('password_confirmation', null)->class('form-control')->placeholder(trans('user_management.placeholder.password_confirmation'))->attributes(['autocomplete' => 'off']) }}
+                    @error('password_confirmation')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
                 </div>
-                @if($user->level() > Auth::user()->level())
-                <div class="form-group">
-                    {!! Form::label('role', trans('user_management.field.role')); !!}
-                    {{ Form::text('role_name', $user->roles->first()->name, ['class' => 'form-control', 'disabled' => 'disabled']) }}
-                    {{ Form::hidden('role', $user->roles->first()->id) }}
-                @else
-                    <div class="form-group">
-                        {!! Form::label('role', trans('user_management.field.role')); !!}
-                        {{ Form::select('role', $roles, $current_role, ['class' => 'form-control select2', 'placeholder' => trans('user_management.placeholder.role')]) }}
-                    </div>
-                @endif
+                <div class="form-group @error('role') has-error @enderror">
+                    {{ html()->label(trans('user_management.field.role'), 'role') }}
+                    {{ html()->select('role', $roles, $user->roles->first()->id ?? null)->class('form-control')->placeholder(trans('user_management.placeholder.role')) }}
+                    @error('role')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
+                </div>
             @endcomponent
         </div>
     </div>
-{!! Form::close() !!}
+    {{ html()->form()->close() }}
 @endsection

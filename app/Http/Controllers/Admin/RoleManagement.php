@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use jeremykenedy\LaravelRoles\Models\Role;
-use jeremykenedy\LaravelRoles\Models\Permission;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use jeremykenedy\LaravelRoles\Models\Permission;
+use jeremykenedy\LaravelRoles\Models\Role;
 
 class RoleManagement extends Controller
 {

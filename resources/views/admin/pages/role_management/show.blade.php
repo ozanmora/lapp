@@ -19,30 +19,38 @@
 
                 <table class="table table-striped table-hover">
                     <tbody>
-                        <tr><th>{{ trans('role_management.field.name') }}</th><td class="text-right">{{ $role->name }}</td></tr>
-                        <tr><th>{{ trans('role_management.field.slug') }}</th><td class="text-right">{{ $role->slug }}</td></tr>
-                        <tr><th>{{ trans('role_management.field.description') }}</th><td class="text-right">{{ $role->description }}</td></tr>
-                        <tr><th>{{ trans('role_management.field.level') }}</th><td class="text-right"><span class="label label-level_{{ $role->level }}">{{ $role->level }}</span></td></tr>
+                        <tr>
+                            <th>{{ trans('role_management.field.name') }}</th>
+                            <td class="text-right">{{ $role->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ trans('role_management.field.slug') }}</th>
+                            <td class="text-right">{{ $role->slug }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ trans('role_management.field.description') }}</th>
+                            <td class="text-right">{{ $role->description }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ trans('role_management.field.level') }}</th>
+                            <td class="text-right"><span class="label label-level_{{ $role->level }}">{{ $role->level }}</span>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
                 @slot('footer')
-                <div class="clearfix text-center">
-                    <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-md btn-warning pull-left">@lang('admin.icon.edit') @lang('admin.button.edit')</a>
-                    <button class="btn btn-md btn-danger pull-right @if ($role->slug === 'root') disabled @endif"
-                        data-confirm="DELETE"
-                        data-confirm_form="delete-form-{{ $role->id }}"
-                        data-confirm_title="{{ trans_choice('role_management.confirm.title_delete', 1, ['name' => $role->name]) }}"
-                        data-confirm_message="{{ trans('role_management.confirm.message_delete') }}">
-                        @lang('admin.icon.delete') @lang('admin.button.delete')</button>
-                    {!! Form::open([
-                        'action' => ['Admin\RoleManagement@destroy', $role],
-                        'method' => 'DELETE',
-                        'class' => 'delete-form hide',
-                        'id' => "delete-form-{$role->id}",
-                    ]) !!}
-                    {!! Form::close() !!}
-                </div>
+                    <div class="clearfix text-center">
+                        <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-md btn-warning pull-left">@lang('admin.icon.edit')
+                            @lang('admin.button.edit')</a>
+                        <button class="btn btn-md btn-danger pull-right @if ($role->slug === 'root') disabled @endif"
+                            data-confirm="DELETE" data-confirm_form="delete-form-{{ $role->id }}"
+                            data-confirm_title="{{ trans_choice('role_management.confirm.title_delete', 1, ['name' => $role->name]) }}"
+                            data-confirm_message="{{ trans('role_management.confirm.message_delete') }}">
+                            @lang('admin.icon.delete') @lang('admin.button.delete')</button>
+                        {{ html()->form('DELETE', route('admin.roles.destroy', $role))->class('delete-form hide')->id("delete-form-{$role->id}")->open() }}
+                        {{ html()->form()->close() }}
+                    </div>
                 @endslot
             @endcomponent
         </div>
@@ -65,8 +73,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($role->users) === 0)
-                            <tr><td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td></tr>
+                        @if (count($role->users) === 0)
+                            <tr>
+                                <td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td>
+                            </tr>
                         @else
                             @foreach ($role->users as $user)
                                 <tr>
@@ -75,24 +85,19 @@
                                     <td>{{ $user->email }}</td>
                                     <td class="text-center">{{ $user->created_at->format('m/d/Y H:i:s') }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.users.show', $user) }}" class="btn btn-xs btn-info" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
-                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
-                                        {{--
-                                        <button class="btn btn-xs btn-danger"
+                                        <a href="{{ route('admin.users.view', $user) }}" class="btn btn-xs btn-info"
+                                            title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
+                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-xs btn-warning"
+                                            title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                        <button class="btn btn-xs btn-danger @if ($role->slug === 'root') disabled @endif"
                                             data-confirm="DETACH"
                                             data-confirm_form="detach_user-form-{{ $user->id }}"
                                             data-confirm_title="{{ trans_choice('role_management.confirm.title_detach_user', 1, ['name' => $user->name]) }}"
                                             data-confirm_message="{{ trans('role_management.confirm.message_detach_user') }}"
                                             data-toggle="tooltip"
                                             title="{{ trans('admin.button.detach') }}">{!! trans('admin.icon.detach') !!}</button>
-                                        {!! Form::open([
-                                            'action' => ['Admin\RoleManagement@detach', 'role_id' => $role->id, 'model' => 'user', 'id' => $user->id ],
-                                            'method' => 'PUT',
-                                            'class' => 'detach-form hide',
-                                            'id' => "detach_user-form-{$user->id}",
-                                        ]) !!}
-                                        {!! Form::close() !!}
-                                        --}}
+                                        {{ html()->form('PUT', route('admin.roles.detach', ['role_id' => $role->id, 'model' => 'user', 'id' => $user->id]))->class('detach_user-form hide')->id("detach_user-form-{$user->id}")->open() }}
+                                        {{ html()->form()->close() }}
                                     </td>
                                 </tr>
                             @endforeach
@@ -118,8 +123,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($role->permissions) === 0)
-                            <tr><td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td></tr>
+                        @if (count($role->permissions) === 0)
+                            <tr>
+                                <td colspan="5" class="text-center">{{ trans('admin.table_no_record') }}</td>
+                            </tr>
                         @else
                             @foreach ($role->permissions as $permission)
                                 <tr>
@@ -128,8 +135,12 @@
                                     <td>{{ $permission->slug }}</td>
                                     <td>{{ $permission->model }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.permissions.show', $permission) }}" class="btn btn-xs btn-info" data-toggle="tooltip" title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
-                                        <a href="{{ route('admin.permissions.edit', $permission) }}" class="btn btn-xs btn-warning" data-toggle="tooltip" title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
+                                        <a href="{{ route('admin.permissions.show', $permission) }}"
+                                            class="btn btn-xs btn-info" data-toggle="tooltip"
+                                            title="{{ trans('admin.button.view') }}">{!! trans('admin.icon.view') !!}</a>
+                                        <a href="{{ route('admin.permissions.edit', $permission) }}"
+                                            class="btn btn-xs btn-warning" data-toggle="tooltip"
+                                            title="{{ trans('admin.button.edit') }}">{!! trans('admin.icon.edit') !!}</a>
                                         <button class="btn btn-xs btn-danger @if ($role->slug === 'root') disabled @endif"
                                             data-confirm="DETACH"
                                             data-confirm_form="detach_permission-form-{{ $permission->id }}"
@@ -137,13 +148,8 @@
                                             data-confirm_message="{{ trans('role_management.confirm.message_detach_permission') }}"
                                             data-toggle="tooltip"
                                             title="{{ trans('admin.button.detach') }}">{!! trans('admin.icon.detach') !!}</button>
-                                        {!! Form::open([
-                                            'action' => ['Admin\RoleManagement@detach', 'role_id' => $role->id, 'model' => 'permission', 'id' => $permission->id ],
-                                            'method' => 'PUT',
-                                            'class' => 'detach-form hide',
-                                            'id' => "detach_permission-form-{$permission->id}",
-                                        ]) !!}
-                                        {!! Form::close() !!}
+                                        {{ html()->form('PUT', route('admin.roles.detach', ['role_id' => $role->id, 'model' => 'permission', 'id' => $permission->id]))->class('detach_permission-form hide')->id("detach_permission-form-{$permission->id}")->open() }}
+                                        {{ html()->form()->close() }}
                                     </td>
                                 </tr>
                             @endforeach

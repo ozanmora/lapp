@@ -1,8 +1,9 @@
 {
-    "/js/admin-lte.js": "/js/admin-lte.js?id=6880f51995fde7165e80",
-    "/css/admin-lte.css": "/css/admin-lte.css?id=aeb0245542f7e4751d53",
-    "/css/auth.css": "/css/auth.css?id=8a979fab608c58163ccf",
-    "/js/auth.js": "/js/auth.js?id=ee91d6f716185c443861",
-    "/js/manifest.js": "/js/manifest.js?id=41f053ba9a94d81b39f8",
-    "/js/vendor.js": "/js/vendor.js?id=fe9002e0fb78a4804746"
+    "/js/admin-lte.js": "/js/admin-lte.js?id=4a05de6bef2db7ff88d2537c281518ac",
+    "/js/auth.js": "/js/auth.js?id=f652a4d1e1a6b42ffdac1b59fe4237de",
+    "/js/manifest.js": "/js/manifest.js?id=7d71a2f3cd58287a42daec80ad3392dd",
+    "/js/vendor.css": "/js/vendor.css?id=16773c16eab442d52ed5a574612f2241",
+    "/js/vendor.js": "/js/vendor.js?id=35bc9eb0629daca8d9861a7c332151f2",
+    "/css/admin-lte.css": "/css/admin-lte.css?id=e638cd64c9afcf33b4ee369d33aaa85e",
+    "/css/auth.css": "/css/auth.css?id=3954d9b8d2b5e43e81facdb264aaf492"
 }

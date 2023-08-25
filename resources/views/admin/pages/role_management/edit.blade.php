@@ -8,7 +8,7 @@
 @section('breadcrumbs', Breadcrumbs::render('admin.roles.edit', $role))
 
 @section('content')
-{!! Form::open(['action' => ['Admin\RoleManagement@update', $role], 'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
+    {{ html()->form('PUT', route('admin.roles.update', $role))->open() }}
     <div class="row">
         <div class="col-xs-12">
             @component('templates.adminlte.components.box')
@@ -18,33 +18,48 @@
                     @endslot
                 @endslot
                 @slot('box_tools')
-                    {{ Form::submit(trans('admin.button.save'), ['class' => 'btn btn-sm btn-primary']) }}
+                    {{ html()->submit(trans('admin.button.save'))->class('btn btn-sm btn-primary') }}
                     <a href="{{ url()->previous() }}" class="btn btn-sm btn-default">{{ trans('admin.button.back') }}</a>
                 @endslot
-                <div class="form-group">
-                    {{ Form::label('name', trans('role_management.field.name')) }}
-                    {{ Form::text('name', $role->name, ['class' => 'form-control', 'placeholder' => trans('role_management.placeholder.name')]) }}
+                <div class="form-group @error('name') has-error @enderror">
+                    {{ html()->label(trans('role_management.field.name'), 'name') }}
+                    {{ html()->text('name', $role->name)->class('form-control')->placeholder(trans('role_management.placeholder.name')) }}
+                    @error('name')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
                 </div>
-                <div class="form-group">
-                    {{ Form::label('slug', trans('role_management.field.slug')) }}
-                    {{ Form::text('slug', $role->slug, ['class' => 'form-control', 'placeholder' => trans('role_management.placeholder.slug')]) }}
+                <div class="form-group @error('slug') has-error @enderror">
+                    {{ html()->label(trans('role_management.field.slug'), 'slug') }}
+                    {{ html()->text('slug', $role->slug)->class('form-control')->placeholder(trans('role_management.placeholder.slug')) }}
+                    @error('slug')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
                 </div>
-                <div class="form-group">
-                    {{ Form::label('level', trans('role_management.field.level')) }}
-                    {{ Form::number('level', $role->level, ['class' => 'form-control', 'placeholder' => trans('role_management.placeholder.level'), 'min' => 0, 'max' => 5]) }}
+                <div class="form-group @error('level') has-error @enderror">
+                    {{ html()->label(trans('role_management.field.level'), 'level') }}
+                    {{ html()->input('number', 'level', $role->level ?? 0)->class('form-control')->placeholder(trans('role_management.placeholder.level'))->attributes(['min' => 0, 'max' => 5]) }}
+                    @error('level')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
                 </div>
-                <div class="form-group">
-                    {{ Form::label('description', trans('role_management.field.description')) }}
-                    {{ Form::text('description', $role->description, ['class' => 'form-control', 'placeholder' => trans('role_management.placeholder.description')]) }}
+                <div class="form-group @error('description') has-error @enderror">
+                    {{ html()->label(trans('role_management.field.description'), 'description') }}
+                    {{ html()->text('description', $role->description)->class('form-control')->placeholder(trans('role_management.placeholder.description')) }}
+                    @error('description')
+                        <span class="help-block">{{ $message }}</span>
+                    @enderror
                 </div>
                 @if ($role->slug !== 'root')
-                    <div class="form-group">
-                        {{ Form::label('permissions', trans('role_management.field.permissions')) }}
-                        {{ Form::select('permissions[]', $permissions, $selected_permissions, ['id' => 'permissions', 'class' => 'form-control select2', 'multiple' => 'multiple']) }}
+                    <div class="form-group @error('permissions') has-error @enderror">
+                        {{ html()->label(trans('role_management.field.permissions'), 'permissions') }}
+                        {{ html()->select('permissions[]', $permissions, $selected_permissions ?? null)->class('form-control')->attributes(['multiple' => 'multiple']) }}
+                        @error('permissions')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
                     </div>
                 @endif
             @endcomponent
         </div>
     </div>
-{!! Form::close() !!}
+    {{ html()->form()->close() }}
 @endsection

@@ -15,7 +15,7 @@
             <div class="clearfix">
                 {!! Form::button(trans('auth.button.forgot_password'), ['type' => 'submit', 'class' => 'btn btn-block btn-flat btn-primary']) !!}
             </div>
-        {!! Form::close() !!}
+        {{ html()->form()->close() }}
         <div class="text-center">
             <p>- {{ __('OR') }} -</p>
             <a class="btn btn-link" href="{{ route('login') }}">{{ trans('auth.text.login') }}</a><br>
