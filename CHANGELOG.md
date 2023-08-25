@@ -1,6 +1,18 @@
 # CHANGELOG
 All notable changes to this project will be documented in this file.
 
+## v1.1.0 - 2023-08-25
+### Upgrade
+* Upgraded Laravel version to 8.x.
+
+## v1.0.5 - ???
+### Updated
+* ???
+
+## v1.0.4 - ???
+### Updated
+* ???
+
 ## v1.0.3 - 2020-02-19
 ### Updated
 * Updated npm packages.
